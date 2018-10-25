@@ -1,0 +1,36 @@
+{
+  "pages":[
+    
+    "pages/课程/课程",
+    "pages/作业/作业"
+  ],
+  "window":{
+    "backgroundTextStyle":"light",
+    "navigationBarBackgroundColor": "#9E9E9E",
+    "navigationBarTitleText": "教育",
+    "navigationBarTextStyle":"black",
+    "backgroundColor": "#CDE000",
+    "onReachBottomDistance": "10px",
+    "enablePullDownRefresh":true
+  },
+  "tabBar":{
+    "backgroundColor": "#000000",
+    "list":[
+      {
+        "pagePath":"pages/课程/课程",
+        "text":"课程",
+        "iconPath":"pages/images/tabbar/作业.png",
+        "selectedIconPath":"pages/images/tabbar/作业.png"
+      },
+      {
+        "pagePath": "pages/作业/作业",
+        "text": "作业",
+        "iconPath": "pages/images/tabbar/作业.png",
+        "selectedIconPath": "pages/images/tabbar/作业.png"
+      }
+    ]
+  }
+  
+
+}
+
