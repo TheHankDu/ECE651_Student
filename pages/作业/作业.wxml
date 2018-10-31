@@ -1,6 +1,8 @@
 <!--pages/作业提交/作业提交.wxml-->
 
-<view class="doc-title">AssignmentOverview</view>
+<view class="doc-title">
+  <text>AssignmentOverview</text>
+</view>
 <view class="hr"></view>
 
 
@@ -17,7 +19,7 @@
 
 
 <view class="doc-content">
-  <button formType='submit' class="upload">file</button>
+  <button formType='submit' class="upload">image</button>
   <button formType='submit' class="submit">提交</button>
 </view>
 

@@ -2,9 +2,11 @@
 <view class="doc-container">
   <view class="doc-title">课程列表/List of classes</view>
     <block wx:for="{{classArray}}">
-      <view class="list" ontap="course">
-        <text class="{{item.styleClass}}">{{item.str}}</text>
-      </view>
+      <navigator url="/pages/作业/作业" hover-class="navigator-hover">
+        <view class="list">
+          <text class="{{item.styleClass}}">{{item.str}}</text>
+        </view>
+      </navigator>
     </block>
 </view>
 

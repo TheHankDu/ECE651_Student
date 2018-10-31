@@ -1,7 +1,8 @@
 {
   "pages":[
-    
     "pages/课程/课程",
+    "pages/成绩/成绩",
+    "pages/声明/声明",
     "pages/作业/作业"
   ],
   "window":{
@@ -14,17 +15,23 @@
     "enablePullDownRefresh":true
   },
   "tabBar":{
-    "backgroundColor": "#000000",
+    "backgroundColor": "white",
     "list":[
-      {
-        "pagePath":"pages/课程/课程",
-        "text":"课程",
-        "iconPath":"pages/images/tabbar/作业.png",
-        "selectedIconPath":"pages/images/tabbar/作业.png"
-      },
       {
         "pagePath": "pages/作业/作业",
         "text": "作业",
+        "iconPath": "pages/images/tabbar/作业.png",
+        "selectedIconPath": "pages/images/tabbar/作业.png"
+      },
+      {
+        "pagePath": "pages/成绩/成绩",
+        "text": "成绩",
+        "iconPath": "pages/images/tabbar/作业.png",
+        "selectedIconPath": "pages/images/tabbar/作业.png"
+      },
+      {
+        "pagePath": "pages/声明/声明",
+        "text": "声明",
         "iconPath": "pages/images/tabbar/作业.png",
         "selectedIconPath": "pages/images/tabbar/作业.png"
       }

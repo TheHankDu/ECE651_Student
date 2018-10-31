@@ -13,7 +13,7 @@
 	"compileType": "miniprogram",
 	"libVersion": "2.0.4",
 	"appid": "wx3283736b60ce15da",
-	"projectname": "WeixinDeveloper",
+	"projectname": "mini_program",
 	"debugOptions": {
 		"hidedInDevtools": []
 	},
