@@ -5,6 +5,7 @@ Page({
    * Page initial data
    */
   data: {
+    char_lt: "<",
     array: [
       {
         "img": '../images/list/Upload.jpg',

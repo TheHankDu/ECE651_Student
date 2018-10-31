@@ -19,8 +19,6 @@
   font-weight: bold;
   position: relative;
   margin: 10px 15px;
-  margin-left: 25%;
-  margin-right: 75%;
   line-height: 25px;
   color: #5a08f1;
 }
@@ -46,4 +44,7 @@
 .submit{
   width: 100px;
   background-color: #daf108;
+}
+.goback{
+  margin-right: 25%
 }

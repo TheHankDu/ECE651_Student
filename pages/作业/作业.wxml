@@ -1,6 +1,7 @@
 <!--pages/作业提交/作业提交.wxml-->
 
 <view class="doc-title">
+  <text class="goback">{{char_lt}}</text>
   <text>AssignmentOverview</text>
 </view>
 <view class="hr"></view>
