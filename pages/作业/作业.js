@@ -5,6 +5,7 @@ Page({
    * Page initial data
    */
   data: {
+    Home: "Return To Home",
     array: [
       {
         "img": '../images/list/Upload.jpg',
@@ -23,9 +24,19 @@ Page({
     ]
   },
 
+  Home: function () {
+    wx.navigateTo({
+      url: '../../pages/课程/课程',
+      success: function () {
+        console.log("called switchetab");
+      }
+    });
+  },
+ 
   /**
    * Lifecycle function--Called when page load
    */
+  
   onLoad: function (options) {
 
   },

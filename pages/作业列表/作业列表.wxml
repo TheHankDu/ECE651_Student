@@ -1,0 +1,9 @@
+<!--pages/作业列表/作业列表.wxml-->
+<view class="doc-title" wx:for="{{AssignmentArray}}">
+  <text class="{{item.styleClass}}" ontap="Assignment">{{item.str}}</text>
+  <view class="hr"></view>
+</view>
+
+
+
+

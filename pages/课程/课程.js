@@ -15,11 +15,11 @@ Page({
         styleClass: 'list_title' 
       }
     ]
-  },
+  }, 
 
   course: function(){
     wx.switchTab({
-      url: '../../pages/作业/作业',
+      url: '../../pages/作业列表/作业列表',
       success: function () {
         console.log("called switchetab");
       }

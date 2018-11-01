@@ -18,10 +18,12 @@
 <view class="hr"></view>
 
 
-<view class="doc-content">
+<view>
   <button formType='submit' class="upload">image</button>
   <button formType='submit' class="submit">提交</button>
 </view>
 
-
+<view>
+  <button class="Home" ontap="Home">{{Home}}</button> 
+</view>
 

@@ -1,4 +1,4 @@
-// pages/成绩/成绩.js
+// pages/成绩列表/成绩列表.js
 Page({
 
   /**
@@ -7,27 +7,19 @@ Page({
   data: {
     GradeArray: [
       {
-        str: 'Score: 95',
+        str: 'Assignment: 1 Grade',
         styleClass: 'list_title'
       },
       {
-        str: 'Highest: 100',
-        styleClass: 'list_title'
-      },
-      {
-        str: 'Lowest: 72',
-        styleClass: 'list_title'
-      }, 
-      {
-        str: 'Average: 88',
+        str: 'Assignment: 2 Grade',
         styleClass: 'list_title'
       }
     ]
   },
 
-  Home: function () {
+  Grade: function () {
     wx.navigateTo({
-      url: '../../pages/课程/课程',
+      url: '../../pages/成绩/成绩',
       success: function () {
         console.log("called switchetab");
       }

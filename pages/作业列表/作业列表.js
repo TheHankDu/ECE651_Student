@@ -1,33 +1,25 @@
-// pages/成绩/成绩.js
+// pages/作业列表/作业列表.js
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
-    GradeArray: [
+    AssignmentArray: [
       {
-        str: 'Score: 95',
+        str: 'Assignment: 1 Due: 10/18/2018 9:59',
         styleClass: 'list_title'
       },
       {
-        str: 'Highest: 100',
-        styleClass: 'list_title'
-      },
-      {
-        str: 'Lowest: 72',
-        styleClass: 'list_title'
-      }, 
-      {
-        str: 'Average: 88',
+        str: 'Assignment: 2 Due: 12/25/2018 23:59',
         styleClass: 'list_title'
       }
     ]
   },
 
-  Home: function () {
+  Assignment: function () {
     wx.navigateTo({
-      url: '../../pages/课程/课程',
+      url: '../../pages/作业/作业',
       success: function () {
         console.log("called switchetab");
       }

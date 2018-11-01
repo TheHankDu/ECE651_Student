@@ -1,0 +1,6 @@
+<!--pages/成绩列表/成绩列表.wxml-->
+<view class="doc-title" wx:for="{{GradeArray}}">
+  <text class="{{item.styleClass}}" ontap="Grade">{{item.str}}</text>
+  <view class="hr"></view>
+</view>
+
