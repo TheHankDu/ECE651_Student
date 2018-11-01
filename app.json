@@ -19,18 +19,19 @@
   },
   "tabBar":{
     "backgroundColor": "white",
+    "selectedColor":"green",
     "list":[
       {
         "pagePath": "pages/成绩列表/成绩列表",
         "text": "成绩列表",
-        "iconPath": "pages/images/tabbar/作业.png",
-        "selectedIconPath": "pages/images/tabbar/作业.png"
+        "iconPath": "pages/images/tabbar/成绩.png",
+        "selectedIconPath": "pages/images/tabbar/成绩.png"
       },
       {
         "pagePath": "pages/声明/声明",
         "text": "声明",
-        "iconPath": "pages/images/tabbar/作业.png",
-        "selectedIconPath": "pages/images/tabbar/作业.png"
+        "iconPath": "pages/images/tabbar/声明.png",
+        "selectedIconPath": "pages/images/tabbar/声明.png"
       },
       {
         "pagePath": "pages/作业列表/作业列表",

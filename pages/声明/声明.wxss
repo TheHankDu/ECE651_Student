@@ -1,1 +1,12 @@
 /* pages/声明/声明.wxss */
+.doc-content{
+  position: relative;
+  margin: 10px 15px;
+  margin-bottom: 150px;
+  line-height: 25px;
+  color: #616828;
+}
+.Home{
+  margin-top: 50%;
+  background-color: #f1da08;
+}

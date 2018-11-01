@@ -17,3 +17,7 @@
   margin: 10px;
   margin-left: 0%;
 }
+.Home{
+  margin-top: 10%;
+  background-color: #f1da08;
+}

@@ -13,6 +13,10 @@ Page({
       {
         str: 'Assignment: 2 Due: 12/25/2018 23:59',
         styleClass: 'list_title'
+      },
+      {
+        str: 'Assignment: 3 Due: 12/31/2018 23:59',
+        styleClass: 'list_title'
       }
     ]
   },
@@ -20,6 +24,15 @@ Page({
   Assignment: function () {
     wx.navigateTo({
       url: '../../pages/作业/作业',
+      success: function () {
+        console.log("called switchetab");
+      }
+    });
+  },
+
+  Home: function () {
+    wx.navigateTo({
+      url: '../../pages/课程/课程',
       success: function () {
         console.log("called switchetab");
       }

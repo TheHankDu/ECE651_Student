@@ -21,7 +21,7 @@ Page({
         "content": 'Content: 3/',
         "Deadline": 'Due: 2018/12/30'
       }
-    ]
+    ]  
   },
 
   Home: function () {
