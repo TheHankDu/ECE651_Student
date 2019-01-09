@@ -1,0 +1,2 @@
+<!--pages/声明内容/声明内容.wxml-->
+<text>{{content}}</text>

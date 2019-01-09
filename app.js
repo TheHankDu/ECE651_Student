@@ -34,6 +34,9 @@ App({
     })
   },
   globalData: {
-    userInfo: null
+    token: '',
+    address: '',
+    currentCourse: null,
+    announcement: null,
   }
 })

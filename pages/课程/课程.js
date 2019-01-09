@@ -1,36 +1,59 @@
 // pages/课程/课程.js
 Page({
-
   /**
    * 页面的初始数据
    */
   data: {
-    classArray:[
-      {
-        str: 'CPE 490/ Prof: Ahuja',
-        styleClass: 'list_title'
-      },
-      {
-        str: 'EE 441/ Prof: Yudong-Yao',
-        styleClass: 'list_title' 
-      }
-    ]
-  }, 
+    classArray:[]
+  },
 
-  course: function(){
+  course(event) {
+    //console.log(event.currentTarget.dataset.course._id);
+    getApp().globalData.currentCourse = event.currentTarget.dataset.course._id;
     wx.switchTab({
-      url: '../../pages/作业列表/作业列表',
+      url: '../../pages/Module/Module',
       success: function () {
-        console.log("called switchetab");
+        console.log(event.currentTarget.dataset);
       }
     });
-  },
+  }, 
   
   /**
    * 生命周期函数--监听页面加载
-   */
+   */ 
   onLoad: function (options) {
-
+    wx.setNavigationBarTitle({
+      title: '课程',
+    })
+    var that = this
+    const address = getApp().globalData.address
+    const tkn = getApp().globalData.token
+    wx.request({
+      url: address + '/users' + '/getCourse',
+      method: "GET",
+      header: {
+        'content-type': 'application/x-www-form-urlencoded',
+        'x-access-token': tkn,
+      },
+      success: function (res) {
+        var cl = that.data.classArray;
+        cl.push(res.data.data);
+        that.setData({
+          classArray: cl[0]
+        });
+        //console.log(cl);
+        //console.log(that.data.classArray);
+        console.log('---Successful---');
+        //console.log(res);
+      },
+      fail: function (res) {
+        console.log('---Fail---');
+        console.log(res);
+      },
+      complete: function (res) {
+        console.log('---Complete---');
+      }
+    })
   },
 
   /**

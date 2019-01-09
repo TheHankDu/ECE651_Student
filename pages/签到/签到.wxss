@@ -1,6 +1,7 @@
-/* pages/作业列表/作业列表.wxss */
+/* pages/签到/签到.wxss */
 .doc-title{
   font-weight: bold;
+  font-size: larger;
   position: relative;
   margin-top: 15px;
   margin-bottom: 15px;
@@ -15,10 +16,26 @@
   height: 3px;
   width: 375px;
   background-color: #d4d4d3;
-  margin: 10px;
+  margin: 20px 5px;
   margin-left: 0%;
 }
 .Home{
   margin-top: 10%;
   background-color: #f1da08;
+}
+.Save{
+  height: 30px;
+  width: 75px;
+  justify-content: center;
+  display: flex;
+  flex-direction: column;
+  font-weight: bold; 
+  background-color: #0178ff;
+  color: white;
+  float: right;
+  margin-right: 3%;
+}
+.radio-group{
+  float: right;
+  margin-right: 5%;
 }

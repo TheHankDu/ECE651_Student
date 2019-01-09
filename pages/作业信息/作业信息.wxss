@@ -1,4 +1,4 @@
-/* pages/声明/声明.wxss */
+/* pages/作业信息/作业信息.wxss */
 .doc-title{
   font-weight: bold;
   position: relative;
@@ -9,7 +9,7 @@
   color: #414141;
 }
 .list_title{
-  margin-left: 25%;
+  margin-left: 25px;
 }
 .hr{
   height: 3px;
@@ -19,6 +19,9 @@
   margin-left: 0%;
 }
 .Home{
-  margin-top: 10%;
+  margin-top: 5%;
   background-color: #f1da08;
+}
+.Add{
+  background-color: #1398f1
 }

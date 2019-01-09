@@ -1,38 +1,29 @@
-// pages/作业列表/作业列表.js
+// pages/课程列表/课程列表.js
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
-    AssignmentArray: [
-      {
-        str: 'Assignment 1: Due: 10/18/2018 9:59',
+    classArray: [
+      { 
+        str: '',
         styleClass: 'list_title'
       },
       {
-        str: 'Assignment 2: Due: 12/25/2018 23:59',
+        str: '',
         styleClass: 'list_title'
       },
       {
-        str: 'Assignment 3: Due: 12/31/2018 23:59',
+        str: '',
         styleClass: 'list_title'
       }
-    ] 
+    ]
   },
 
-  Assignment: function () {
-    wx.navigateTo({
-      url: '../../pages/作业/作业',
-      success: function () {
-        console.log("called switchetab");
-      }
-    });
-  },
-
-  Home: function () {
-    wx.navigateTo({
-      url: '../../pages/课程/课程',
+  course: function () {
+    wx.switchTab({
+      url: '../../pages/签到/签到',
       success: function () {
         console.log("called switchetab");
       }
@@ -43,8 +34,30 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    wx.setNavigationBarTitle({
-      title: '作业列表',
+    var that = this
+    const address = getApp().globalData.address
+    const tkn = getApp().globalData.token
+    wx.request({
+      url: address + '/users' + '/getCourse',
+      method: "GET",
+      header: {
+        'content-type': 'application/x-www-form-urlencoded',
+        'x-access-token': tkn,
+      },
+      success: function (res) {
+        that.setData({
+          'classArray[0].str': res.data.data[0].prefix + res.data.data[0].number + '/section: ' + res.data.data[0].section
+        });
+        console.log('---Successful---');
+        console.log(res);
+      },
+      fail: function (res) {
+        console.log('---Fail---');
+        console.log(res);
+      },
+      complete: function (res) {
+        console.log('---Complete---');
+      }
     })
   },
 

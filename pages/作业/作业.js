@@ -2,26 +2,15 @@
 Page({
 
   /**
-   * Page initial data
+   * Page initial data 
    */
-  data: {
+  data: { 
     Home: "Return To Home",
-    array: [
-      {
-        "img": '../images/list/Upload.jpg',
-        "title": 'CPE 490 Prof: Ahuja',
-        "type": 'Assignments/',
-        "content": 'Content: 2/',
-        "Deadline": 'Due: 2018/12/31'
-      },
-      {
-        "img": '../images/list/Upload.jpg',
-        "title": 'EE 441 Prof: Yao',
-        "type": 'Assignments/',
-        "content": 'Content: 3/',
-        "Deadline": 'Due: 2018/12/30'
-      }
-    ]  
+    tmpImageUrl: [],
+    flexImageSize:{
+      width: 0,
+      height: 0
+    }
   },
 
   Home: function () {
@@ -30,15 +19,42 @@ Page({
       success: function () {
         console.log("called switchetab");
       }
-    });
+    }); 
   },
  
+  Upload: function () {
+    var that = this
+    wx.chooseImage({
+      count: 3,
+      sizeType: ['original','compressed'],
+      sourceType: ['album','camera'],
+      success: function(res) {
+        console.log(res)
+          that.setData({
+            tmpImageUrl: res.tempFilePaths
+          });
+      },
+    })
+  },
+
+  tmpImageLoaded: function(res){
+    console.log(res);
+    var width = 250 ;
+    var height = 250 / res.detail.width * res.detail.height
+    this.setData({
+      'flexImageSize.width': width + 'rpx',
+      'flexImageSize.height': height + 'rpx'
+    });
+  },
+
   /**
    * Lifecycle function--Called when page load
    */
   
   onLoad: function (options) {
-
+    wx.setNavigationBarTitle({
+      title: '作业详情',
+    })
   },
 
   /**

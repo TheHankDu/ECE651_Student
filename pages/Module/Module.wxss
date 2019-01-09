@@ -1,4 +1,4 @@
-/* pages/声明/声明.wxss */
+/* pages/module/module.wxss */
 .doc-title{
   font-weight: bold;
   position: relative;

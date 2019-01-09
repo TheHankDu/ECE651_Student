@@ -1,29 +1,39 @@
-// pages/作业列表/作业列表.js
+// pages/作业信息/作业信息.js
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
+    Add: "Add-Assignment",
     AssignmentArray: [
       {
-        str: 'Assignment 1: Due: 10/18/2018 9:59',
+        str: 'Assignment 1: 15-Submissions',
         styleClass: 'list_title'
       },
       {
-        str: 'Assignment 2: Due: 12/25/2018 23:59',
+        str: 'Assignment 2: 3-Submissions',
         styleClass: 'list_title'
       },
       {
-        str: 'Assignment 3: Due: 12/31/2018 23:59',
+        str: 'Assignment 3: 0-Submission',
         styleClass: 'list_title'
       }
-    ] 
+    ]
   },
 
-  Assignment: function () {
+  Add: function () {
     wx.navigateTo({
-      url: '../../pages/作业/作业',
+      url: '../../pages/作业内容/作业内容',
+      success: function () {
+        console.log("called switchetab");
+      }
+    });
+  },
+
+  View: function () {
+    wx.navigateTo({
+      url: '../../pages/提交情况/提交情况',
       success: function () {
         console.log("called switchetab");
       }
@@ -32,7 +42,7 @@ Page({
 
   Home: function () {
     wx.navigateTo({
-      url: '../../pages/课程/课程',
+      url: '../../pages/课程列表/课程列表',
       success: function () {
         console.log("called switchetab");
       }
@@ -43,9 +53,7 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    wx.setNavigationBarTitle({
-      title: '作业列表',
-    })
+
   },
 
   /**

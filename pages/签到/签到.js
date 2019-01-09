@@ -1,38 +1,49 @@
-// pages/作业列表/作业列表.js
+// pages/签到/签到.js
 Page({
-
+ 
   /**
    * 页面的初始数据
    */
   data: {
-    AssignmentArray: [
+    SectionArray: [
       {
-        str: 'Assignment 1: Due: 10/18/2018 9:59',
+        str: '张三',
         styleClass: 'list_title'
       },
       {
-        str: 'Assignment 2: Due: 12/25/2018 23:59',
+        str: '李四',
         styleClass: 'list_title'
       },
       {
-        str: 'Assignment 3: Due: 12/31/2018 23:59',
+        str: '王五',
+        styleClass: 'list_title'
+      },
+      {
+        str: '赵六',
+        styleClass: 'list_title'
+      },
+      {
+        str: '钱七',
         styleClass: 'list_title'
       }
-    ] 
+    ],
+    AttendArray: [
+      { name: 'Attended', value: 'yes', checked: 'true' },
+      { name: 'Not Attended', value: 'no'}
+    ]
   },
 
-  Assignment: function () {
-    wx.navigateTo({
-      url: '../../pages/作业/作业',
-      success: function () {
-        console.log("called switchetab");
-      }
-    });
+  save_status: function (e){
+    console.log('status saved')
+  },
+
+  radioChange: function (e) {
+    console.log('radio发生change事件，携带value值为：', e.detail.value)
   },
 
   Home: function () {
     wx.navigateTo({
-      url: '../../pages/课程/课程',
+      url: '../../pages/课程列表/课程列表',
       success: function () {
         console.log("called switchetab");
       }
@@ -43,9 +54,7 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    wx.setNavigationBarTitle({
-      title: '作业列表',
-    })
+
   },
 
   /**

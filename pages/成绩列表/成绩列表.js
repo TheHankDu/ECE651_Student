@@ -7,17 +7,17 @@ Page({
   data: {
     GradeArray: [
       {
-        str: 'Assignment: 1 Grade',
+        str: 'Assignment 1: Grade',
         styleClass: 'list_title'
       },
       {
-        str: 'Assignment: 2 Grade',
+        str: 'Assignment 2: Grade',
         styleClass: 'list_title'
       }
     ]
   },
 
-
+ 
   Grade: function () {
     wx.navigateTo({
       url: '../../pages/成绩/成绩',
@@ -42,7 +42,9 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-
+    wx.setNavigationBarTitle({
+      title: '成绩列表',
+    })
   },
 
   /**

@@ -1,42 +1,11 @@
-// pages/作业列表/作业列表.js
+// pages/声明内容/声明内容.js
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
-    AssignmentArray: [
-      {
-        str: 'Assignment 1: Due: 10/18/2018 9:59',
-        styleClass: 'list_title'
-      },
-      {
-        str: 'Assignment 2: Due: 12/25/2018 23:59',
-        styleClass: 'list_title'
-      },
-      {
-        str: 'Assignment 3: Due: 12/31/2018 23:59',
-        styleClass: 'list_title'
-      }
-    ] 
-  },
-
-  Assignment: function () {
-    wx.navigateTo({
-      url: '../../pages/作业/作业',
-      success: function () {
-        console.log("called switchetab");
-      }
-    });
-  },
-
-  Home: function () {
-    wx.navigateTo({
-      url: '../../pages/课程/课程',
-      success: function () {
-        console.log("called switchetab");
-      }
-    });
+    content: "",
   },
 
   /**
@@ -44,8 +13,39 @@ Page({
    */
   onLoad: function (options) {
     wx.setNavigationBarTitle({
-      title: '作业列表',
+      title: '声明内容',
     })
+    var that = this
+    const address = getApp().globalData.address
+    const tkn = getApp().globalData.token
+    var courseid = getApp().globalData.currentCourse
+    var headup = getApp().globalData.announcement
+    //console.log(courseid)
+    wx.request({
+      url: address + '/courses' + '/getAnnouncement',
+      data: {
+        course: courseid
+      },
+      method: "POST",
+      header: {
+        'content-type': 'application/x-www-form-urlencoded',
+        'x-access-token': tkn
+      },
+      success: function (res) {
+        console.log(headup);
+        that.setData({
+          content: headup
+        })
+       //console.log(that.data.content)
+      },
+      fail: function (res) {
+
+      },
+      complete: function (res) {
+
+      }
+    })
+    
   },
 
   /**

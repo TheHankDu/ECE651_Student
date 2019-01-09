@@ -1,18 +1,22 @@
 {
   "pages":[
+    "pages/用户中心/用户中心",
     "pages/课程/课程",
-    "pages/成绩列表/成绩列表",
-    "pages/成绩/成绩",
-    "pages/声明/声明",
+    "pages/Module/Module",
     "pages/作业列表/作业列表",
-    "pages/作业/作业"
-    
+    "pages/成绩列表/成绩列表",
+    "pages/声明/声明",
+    "pages/ModuleInfo/ModuleInfo",
+    "pages/作业/作业",
+    "pages/成绩/成绩",
+    "pages/声明内容/声明内容"
   ],
   "window":{
     "backgroundTextStyle":"light",
     "navigationBarBackgroundColor": "#9E9E9E",
-    "navigationBarTitleText": "教育",
+    "navigationBarTitleText": "Jovial",
     "navigationBarTextStyle":"black",
+    "navigationBarTextSize": "larger",
     "backgroundColor": "#CDE000",
     "onReachBottomDistance": "10px",
     "enablePullDownRefresh":true
@@ -21,6 +25,18 @@
     "backgroundColor": "white",
     "selectedColor":"green",
     "list":[
+      {
+        "pagePath": "pages/Module/Module",
+        "text": "Module",
+        "iconPath": "pages/images/tabbar/老师.png",
+        "selectedIconPath": "pages/images/tabbar/老师.png"
+      },
+      {
+        "pagePath": "pages/作业列表/作业列表",
+        "text": "作业列表",
+        "iconPath": "pages/images/tabbar/作业.png",
+        "selectedIconPath": "pages/images/tabbar/作业.png"
+      },
       {
         "pagePath": "pages/成绩列表/成绩列表",
         "text": "成绩列表",
@@ -32,15 +48,12 @@
         "text": "声明",
         "iconPath": "pages/images/tabbar/声明.png",
         "selectedIconPath": "pages/images/tabbar/声明.png"
-      },
-      {
-        "pagePath": "pages/作业列表/作业列表",
-        "text": "作业列表",
-        "iconPath": "pages/images/tabbar/作业.png",
-        "selectedIconPath": "pages/images/tabbar/作业.png"
-      }
+      } 
     ]
+     
   }
+
+  
   
 
 }
