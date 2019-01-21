@@ -1,0 +1,10 @@
+<!--pages/Course列表/Course列表.wxml-->
+<view class="doc-container">
+  <view class="doc-title">List of classes</view>
+    <block wx:for="{{classArray}}">
+      <view class="list" ontap="course">
+        <text class="{{item.styleClass}}">{{item.str}}</text>
+      </view>
+    </block>
+</view>
+ 

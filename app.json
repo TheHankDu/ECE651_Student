@@ -1,15 +1,15 @@
 {
   "pages":[
-    "pages/用户中心/用户中心",
-    "pages/课程/课程",
+    "pages/UserCenter/UserCenter",
+    "pages/Course/Course",
     "pages/Module/Module",
-    "pages/作业列表/作业列表",
-    "pages/成绩列表/成绩列表",
-    "pages/声明/声明",
+    "pages/HwList/HwList",
+    "pages/GrdList/GrdList",
+    "pages/Announcement/Announcement",
     "pages/ModuleInfo/ModuleInfo",
-    "pages/作业/作业",
-    "pages/成绩/成绩",
-    "pages/声明内容/声明内容"
+    "pages/Homework/Homework",
+    "pages/Grade/Grade",
+    "pages/AnnContent/AnnContent"
   ],
   "window":{
     "backgroundTextStyle":"light",
@@ -28,26 +28,26 @@
       {
         "pagePath": "pages/Module/Module",
         "text": "Module",
-        "iconPath": "pages/images/tabbar/老师.png",
-        "selectedIconPath": "pages/images/tabbar/老师.png"
+        "iconPath": "pages/images/tabbar/teacher.png",
+        "selectedIconPath": "pages/images/tabbar/teacher.png"
       },
       {
-        "pagePath": "pages/作业列表/作业列表",
-        "text": "作业列表",
-        "iconPath": "pages/images/tabbar/作业.png",
-        "selectedIconPath": "pages/images/tabbar/作业.png"
+        "pagePath": "pages/HwList/HwList",
+        "text": "HwList",
+        "iconPath": "pages/images/tabbar/Homework.png",
+        "selectedIconPath": "pages/images/tabbar/Homework.png"
       },
       {
-        "pagePath": "pages/成绩列表/成绩列表",
-        "text": "成绩列表",
-        "iconPath": "pages/images/tabbar/成绩.png",
-        "selectedIconPath": "pages/images/tabbar/成绩.png"
+        "pagePath": "pages/GrdList/GrdList",
+        "text": "GrdList",
+        "iconPath": "pages/images/tabbar/Grade.png",
+        "selectedIconPath": "pages/images/tabbar/Grade.png"
       },
       {
-        "pagePath": "pages/声明/声明",
-        "text": "声明",
-        "iconPath": "pages/images/tabbar/声明.png",
-        "selectedIconPath": "pages/images/tabbar/声明.png"
+        "pagePath": "pages/Announcement/Announcement",
+        "text": "Announcement",
+        "iconPath": "pages/images/tabbar/Announcement.png",
+        "selectedIconPath": "pages/images/tabbar/Announcement.png"
       } 
     ]
      

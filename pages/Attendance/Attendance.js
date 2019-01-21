@@ -1,48 +1,60 @@
-// pages/module/module.js
+// pages/签到/签到.js
 Page({
-
+ 
   /**
    * 页面的初始数据
    */
   data: {
-    ModuleArray: [
+    SectionArray: [
       {
-        str: 'Class 1: Wireless',
+        str: '张三',
         styleClass: 'list_title'
       },
       {
-        str: 'Class 2: TCP/IP',
+        str: '李四',
+        styleClass: 'list_title'
+      },
+      {
+        str: '王五',
+        styleClass: 'list_title'
+      },
+      {
+        str: '赵六',
+        styleClass: 'list_title'
+      },
+      {
+        str: '钱七',
         styleClass: 'list_title'
       }
+    ],
+    AttendArray: [
+      { name: 'Attended', value: 'yes', checked: 'true' },
+      { name: 'Not Attended', value: 'no'}
     ]
   },
 
-  Module: function () {
-    wx.navigateTo({
-      url: '../../pages/ModuleInfo/ModuleInfo',
-      success: function () {
-        console.log("called switchetab");
-      }
-    });
+  save_status: function (e){
+    console.log('status saved')
+  },
+
+  radioChange: function (e) {
+    console.log('radio发生change事件，携带value值为：', e.detail.value)
   },
 
   Home: function () {
     wx.navigateTo({
-      url: '../../pages/Course/Course',
+      url: '../../pages/Course列表/Course列表',
       success: function () {
         console.log("called switchetab");
       }
     });
   },
-
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    wx.setNavigationBarTitle({
-      title: 'Module'
-    })
+
   },
 
   /**

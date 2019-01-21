@@ -1,48 +1,65 @@
-// pages/module/module.js
+// pages/主页/主页.js
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
-    ModuleArray: [
+    imgUrls: [
+      '../images/poster/主页1.jpg',
+      '../images/poster/主页2.jpg',
+      '../images/poster/主页3.jpg'
+    ],
+    indicatorDots: true,
+    autoplay: true,
+    interval: 2000,
+    duration: 1000,
+    array:['学生', '老师', '主任', '管理员'],
+    objectArray:[
       {
-        str: 'Class 1: Wireless',
-        styleClass: 'list_title'
+        id: 0,
+        name: '学生'
       },
       {
-        str: 'Class 2: TCP/IP',
-        styleClass: 'list_title'
+        id: 1,
+        name: '老师'
+      },
+      {
+        id: 2,
+        name: '主任'
+      },
+      {
+        id: 3,
+        name: '管理员'
       }
-    ]
+    ],
+    index: 0,
   },
 
-  Module: function () {
+  //next跳转至登陆界面
+  next: function (e) {
+    //进行 tab 跳转
     wx.navigateTo({
-      url: '../../pages/ModuleInfo/ModuleInfo',
+      url: '../../pages/UserCenter/UserCenter',
       success: function () {
-        console.log("called switchetab");
+      console.log("called switchetab");
       }
-    });
+    });    
   },
 
-  Home: function () {
-    wx.navigateTo({
-      url: '../../pages/Course/Course',
-      success: function () {
-        console.log("called switchetab");
-      }
-    });
+  //选择器选择登陆身份
+  bindPickerChange: function(e){
+    console.log('picker值发生改变，目前为', e.detail.value)
+    this.setData({
+      index: e.detail.value    
+    })
   },
-
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    wx.setNavigationBarTitle({
-      title: 'Module'
-    })
+
   },
 
   /**

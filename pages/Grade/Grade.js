@@ -1,29 +1,28 @@
-// pages/module/module.js
+// pages/Grade/Grade.js
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
-    ModuleArray: [
+    GradeArray: [
       {
-        str: 'Class 1: Wireless',
+        str: 'Score: 95',
         styleClass: 'list_title'
       },
       {
-        str: 'Class 2: TCP/IP',
+        str: 'Highest: 100',
+        styleClass: 'list_title'
+      },
+      {
+        str: 'Lowest: 72',
+        styleClass: 'list_title'
+      }, 
+      {
+        str: 'Average: 88',
         styleClass: 'list_title'
       }
     ]
-  },
-
-  Module: function () {
-    wx.navigateTo({
-      url: '../../pages/ModuleInfo/ModuleInfo',
-      success: function () {
-        console.log("called switchetab");
-      }
-    });
   },
 
   Home: function () {
@@ -33,15 +32,14 @@ Page({
         console.log("called switchetab");
       }
     });
-  },
-
+  }, 
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
     wx.setNavigationBarTitle({
-      title: 'Module'
+      title: 'Grade',
     })
   },
 

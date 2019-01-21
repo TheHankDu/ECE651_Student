@@ -1,25 +1,29 @@
-// pages/module/module.js
+// pages/HwList/HwList.js
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
-    ModuleArray: [
+    AssignmentArray: [
       {
-        str: 'Class 1: Wireless',
+        str: 'Assignment 1: Due: 10/18/2018 9:59',
         styleClass: 'list_title'
       },
       {
-        str: 'Class 2: TCP/IP',
+        str: 'Assignment 2: Due: 12/25/2018 23:59',
+        styleClass: 'list_title'
+      },
+      {
+        str: 'Assignment 3: Due: 12/31/2018 23:59',
         styleClass: 'list_title'
       }
-    ]
+    ] 
   },
 
-  Module: function () {
+  Assignment: function () {
     wx.navigateTo({
-      url: '../../pages/ModuleInfo/ModuleInfo',
+      url: '../../pages/Homework/Homework',
       success: function () {
         console.log("called switchetab");
       }
@@ -35,13 +39,12 @@ Page({
     });
   },
 
-
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
     wx.setNavigationBarTitle({
-      title: 'Module'
+      title: 'HwList',
     })
   },
 

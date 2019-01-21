@@ -1,25 +1,39 @@
-// pages/module/module.js
+// pages/Homework信息/Homework信息.js
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
-    ModuleArray: [
+    Add: "Add-Assignment",
+    AssignmentArray: [
       {
-        str: 'Class 1: Wireless',
+        str: 'Assignment 1: 15-Submissions',
         styleClass: 'list_title'
       },
       {
-        str: 'Class 2: TCP/IP',
+        str: 'Assignment 2: 3-Submissions',
+        styleClass: 'list_title'
+      },
+      {
+        str: 'Assignment 3: 0-Submission',
         styleClass: 'list_title'
       }
     ]
   },
 
-  Module: function () {
+  Add: function () {
     wx.navigateTo({
-      url: '../../pages/ModuleInfo/ModuleInfo',
+      url: '../../pages/Homework内容/Homework内容',
+      success: function () {
+        console.log("called switchetab");
+      }
+    });
+  },
+
+  View: function () {
+    wx.navigateTo({
+      url: '../../pages/提交情况/提交情况',
       success: function () {
         console.log("called switchetab");
       }
@@ -28,21 +42,18 @@ Page({
 
   Home: function () {
     wx.navigateTo({
-      url: '../../pages/Course/Course',
+      url: '../../pages/Course列表/Course列表',
       success: function () {
         console.log("called switchetab");
       }
     });
   },
 
-
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    wx.setNavigationBarTitle({
-      title: 'Module'
-    })
+
   },
 
   /**
