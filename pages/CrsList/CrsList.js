@@ -23,7 +23,7 @@ Page({
 
   course: function () {
     wx.switchTab({
-      url: '../../pages/签到/签到',
+      url: '../../pages/Attendance/Attendance',
       success: function () {
         console.log("called switchetab");
       }

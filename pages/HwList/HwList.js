@@ -3,19 +3,20 @@ Page({
 
   /**
    * 页面的初始数据
+   * Hw + status
    */
   data: {
     AssignmentArray: [
       {
-        str: 'Assignment 1: Due: 10/18/2018 9:59',
+        str: 'A1: Submitted',
         styleClass: 'list_title'
       },
       {
-        str: 'Assignment 2: Due: 12/25/2018 23:59',
+        str: 'A2: Overdue',
         styleClass: 'list_title'
       },
       {
-        str: 'Assignment 3: Due: 12/31/2018 23:59',
+        str: 'A3: Not Submitted',
         styleClass: 'list_title'
       }
     ] 
@@ -45,6 +46,58 @@ Page({
   onLoad: function (options) {
     wx.setNavigationBarTitle({
       title: 'HwList',
+    })
+    var that = this
+    const address = getApp().globalData.address
+    const tkn = getApp().globalData.token
+
+    //Get Homework
+    /*wx.request({
+      url: address + '/course/homework/get_all',
+      method: "GET",
+      header: {
+        'content-type': 'application/x-www-form-urlencoded',
+        'x-access-token': tkn,
+      },
+      success: function (res) {
+        //probably use for loop to set all item in array?
+        that.setData({
+          'classArray[0].str': res.data.data[0].prefix + res.data.data[0].number + '/section: ' + res.data.data[0].section
+        });
+        console.log('---Successful---');
+        console.log(res);
+      },
+      fail: function (res) {
+        console.log('---Fail---');
+        console.log(res);
+      },
+      complete: function (res) {
+        console.log('---Complete---');
+      }
+    })*/
+
+    //Get Status
+    wx.request({
+      url: address + '/course/homework/submission/get_self',
+      method: "GET",
+      header: {
+        'content-type': 'application/x-www-form-urlencoded',
+        'x-access-token': tkn,
+      },
+      success: function (res) {
+        that.setData({
+          'classArray[0].str': res.data.data[0].prefix + res.data.data[0].number + '/section: ' + res.data.data[0].section
+        });
+        console.log('---Successful---');
+        console.log(res);
+      },
+      fail: function (res) {
+        console.log('---Fail---');
+        console.log(res);
+      },
+      complete: function (res) {
+        console.log('---Complete---');
+      }
     })
   },
 

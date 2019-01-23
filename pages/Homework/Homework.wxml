@@ -7,13 +7,14 @@
 
  
 <view class="doc-content">
-  <text>Description:</text>
+  <text>Description: 阅读网盘中的材料,描述自己的感受
+  云盘链接</text>
 </view>
 <view class="hr"></view>
 
 
 <view class="doc-content">
-  <input placeholder="Answer:"></input>
+  <input placeholder="Due Date:"></input>
 </view>
 <view class="hr"></view>
 

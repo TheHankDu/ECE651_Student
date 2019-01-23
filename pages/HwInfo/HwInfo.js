@@ -24,7 +24,7 @@ Page({
 
   Add: function () {
     wx.navigateTo({
-      url: '../../pages/Homework内容/Homework内容',
+      url: '../../pages/HwContent/HwContent',
       success: function () {
         console.log("called switchetab");
       }
@@ -33,7 +33,7 @@ Page({
 
   View: function () {
     wx.navigateTo({
-      url: '../../pages/提交情况/提交情况',
+      url: '../../pages/Submission/Submission',
       success: function () {
         console.log("called switchetab");
       }
@@ -42,7 +42,7 @@ Page({
 
   Home: function () {
     wx.navigateTo({
-      url: '../../pages/Course列表/Course列表',
+      url: '../../pages/CrsList/CrsList',
       success: function () {
         console.log("called switchetab");
       }

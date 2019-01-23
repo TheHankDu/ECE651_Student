@@ -53,7 +53,7 @@ Page({
   
   onLoad: function (options) {
     wx.setNavigationBarTitle({
-      title: 'Homework详情',
+      title: 'Homework Info',
     })
   },
 

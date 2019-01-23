@@ -36,6 +36,8 @@ Page({
     });
     const address = 'https://jovialapp.herokuapp.com'
     getApp().globalData.address = address
+    this.data.email = 'feng@gdao.com'
+    this.data.password = 'gaofeng'
     wx.request({ //网络请求开始
       url: address +'/users'+'/getToken',
       data:{ 

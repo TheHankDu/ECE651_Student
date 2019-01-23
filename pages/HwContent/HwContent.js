@@ -10,7 +10,7 @@ Page({
 
   Home: function () {
     wx.navigateTo({
-      url: '../../pages/Course列表/Course列表',
+      url: '../../pages/CrsList/CrsList',
       success: function () {
         console.log("called switchetab");
       }
