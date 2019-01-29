@@ -7,24 +7,26 @@
 
  
 <view class="doc-content">
-  <text>Description: 阅读网盘中的材料,描述自己的感受
-  云盘链接</text>
+  <text>Description: 
+  阅读网盘中的材料,描述自己的感受
+  云盘链接
+
+
+
+  Due Date: 2019/01/25
+  </text>
 </view>
 <view class="hr"></view>
 
-
+<!-->
 <view class="doc-content">
   <input placeholder="Due Date:"></input>
 </view>
 <view class="hr"></view>
-
+<-->
 
 <view>
-  <button formType='submit' class="upload" bindtap="Upload">Upload</button>
-  <block wx:for="{{tmpImageUrl}}" wx:key="{{index}}">
-    <image src='{{tmpImageUrl[index]}}' mode='aspectFit' bindload='tmpImageLoaded' style='width:{{flexImageSize.width}}; height:{{flexImageSize.height}};'></image>
-  </block>
-  <button formType='submit' class="submit">Submit</button>
+  <button formType='Submit' class="Submit" ontap='Submit'>Submit</button>
 </view>
 
 <view>

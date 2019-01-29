@@ -5,21 +5,36 @@ Page({
    * 页面的初始数据
    * Hw + status
    */
+
   data: {
     AssignmentArray: [
       {
-        str: 'A1: Submitted',
+        str: 'A1',
+        status: 1,
         styleClass: 'list_title'
       },
       {
-        str: 'A2: Overdue',
+        str: 'A2',
+        status: 2,
         styleClass: 'list_title'
       },
       {
-        str: 'A3: Not Submitted',
+        str: 'A3',
+        status: 3,
         styleClass: 'list_title'
       }
-    ] 
+    ],
+
+      Status :[{
+      SUBMITTED: 1,
+      NOTSUBMITTED: 2,
+      OVERDUE: 3,
+        properties: {
+          1: { name: "submitted", value: 1, code: "S" },
+          2: { name: "notsubmitted", value: 2, code: "N" },
+          3: { name: "overdue", value: 3, code: "o" }
+        }
+    }]
   },
 
   Assignment: function () {
@@ -52,9 +67,10 @@ Page({
     const tkn = getApp().globalData.token
 
     //Get Homework
-    /*wx.request({
+    wx.request({
       url: address + '/course/homework/get_all',
       method: "GET",
+      //parameter: ""
       header: {
         'content-type': 'application/x-www-form-urlencoded',
         'x-access-token': tkn,
@@ -74,10 +90,10 @@ Page({
       complete: function (res) {
         console.log('---Complete---');
       }
-    })*/
+    })
 
     //Get Status
-    wx.request({
+    /*wx.request({
       url: address + '/course/homework/submission/get_self',
       method: "GET",
       header: {
@@ -98,7 +114,7 @@ Page({
       complete: function (res) {
         console.log('---Complete---');
       }
-    })
+    })*/
   },
 
   /**

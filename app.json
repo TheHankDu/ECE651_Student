@@ -1,5 +1,6 @@
 {
   "pages": [
+    "pages/HwSubm/HwSubm",
     "pages/UserCenter/UserCenter",
     "pages/Course/Course",
     "pages/Module/Module",
@@ -9,8 +10,8 @@
     "pages/ModuleInfo/ModuleInfo",
     "pages/Homework/Homework",
     "pages/Grade/Grade",
-    "pages/AnnContent/AnnContent",
-    "pages/HwSubm"
+    "pages/AnnContent/AnnContent"
+    
   ],
   "window": {
     "backgroundTextStyle": "light",
@@ -28,25 +29,31 @@
     "list": [
       {
         "pagePath": "pages/Module/Module",
-        "text": "Module",
+        "text": "课间",
         "iconPath": "pages/images/tabbar/teacher.png",
         "selectedIconPath": "pages/images/tabbar/teacher.png"
       },
       {
         "pagePath": "pages/HwList/HwList",
-        "text": "HwList",
+        "text": "作业",
         "iconPath": "pages/images/tabbar/Homework.png",
         "selectedIconPath": "pages/images/tabbar/Homework.png"
       },
       {
+        "pagePath": "pages/ModuleInfo/ModuleInfo",
+        "text": "课程",
+        "iconPath": "pages/images/tabbar/Grade.png",
+        "selectedIconPath": "pages/images/tabbar/Grade.png"
+      },
+      {
         "pagePath": "pages/GrdList/GrdList",
-        "text": "GrdList",
+        "text": "成绩",
         "iconPath": "pages/images/tabbar/Grade.png",
         "selectedIconPath": "pages/images/tabbar/Grade.png"
       },
       {
         "pagePath": "pages/Announcement/Announcement",
-        "text": "Announcement",
+        "text": "通知",
         "iconPath": "pages/images/tabbar/Announcement.png",
         "selectedIconPath": "pages/images/tabbar/Announcement.png"
       }

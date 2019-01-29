@@ -21,6 +21,15 @@ Page({
       }
     }); 
   },
+
+  Submit: function() {
+    wx.navigateTo({
+      url: '../../pages/HwSubm/HwSubm',
+      success: function () {
+        console.log("From Homework to HwSubm")
+      }
+    })
+  },
  
   Upload: function () {
     var that = this
@@ -46,7 +55,7 @@ Page({
       'flexImageSize.height': height + 'rpx'
     });
   },
-
+  
   /**
    * Lifecycle function--Called when page load
    */
