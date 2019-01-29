@@ -20,7 +20,7 @@
     "navigationBarTextStyle": "black",
     "navigationBarTextSize": "larger",
     "backgroundColor": "#CDE000",
-    "onReachBottomDistance": "10px",
+    "onReachBottomDistance": 10,
     "enablePullDownRefresh": true
   },
   "tabBar": {

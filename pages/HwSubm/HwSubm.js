@@ -5,7 +5,7 @@ Page({
    * Page initial data
    */
   data: {
-
+      files: []
   },
 
   Home: function () {
@@ -26,9 +26,16 @@ Page({
       success: function (res) {
         console.log(res)
         that.setData({
-          tmpImageUrl: res.tempFilePaths
+          files: that.data.files.concat(res.tempFilePaths)
         });
-      },
+      }
+    })
+  },
+
+  PreviewImage: function (e) {
+    wx.previewImage({
+      current: e.currentTarget.id, // 当前显示图片的http链接
+      urls: this.data.files // 需要预览的图片http链接列表
     })
   },
 
