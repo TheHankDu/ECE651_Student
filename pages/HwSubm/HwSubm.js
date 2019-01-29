@@ -5,7 +5,9 @@ Page({
    * Page initial data
    */
   data: {
-      files: []
+      cloudLink: "",
+      recordFiles: [],
+      imageFiles: []
   },
 
   Home: function () {
@@ -26,7 +28,7 @@ Page({
       success: function (res) {
         console.log(res)
         that.setData({
-          files: that.data.files.concat(res.tempFilePaths)
+          imageFiles: that.data.imageFiles.concat(res.tempFilePaths)
         });
       }
     })
@@ -35,7 +37,7 @@ Page({
   PreviewImage: function (e) {
     wx.previewImage({
       current: e.currentTarget.id, // 当前显示图片的http链接
-      urls: this.data.files // 需要预览的图片http链接列表
+      urls: this.data.imageFiles // 需要预览的图片http链接列表
     })
   },
 

@@ -25,20 +25,22 @@
   <view class="page__bd">
       <view class="weui-cells">
         <view class="weui-cell">
-          <view class="weui-uploader">
-              <view class="weui-uploader__hd">
-                  <view class="weui-uploader__title">图片上传</view>
-                  <view class="weui-uploader__info">{{files.length}}/9</view>
-              </view>
-              <view class="weui-uploader__bd">
-                  <view class="weui-uploader__files" id="uploaderFiles">
-                    <block wx:for-items="{{files}}" wx:key="{{index}}">
-                        <view class="weui-uploader__file" bindtap="PreviewImage" id="{{item}}">
-                            <image class="weui-uploader__img" src="{{item}}" mode="aspectFill" />
-                        </view>
-                    </block>
-                  <view class="weui-uploader__input-box">
-                      <view class="weui-uploader__input" bindtap="Upload"></view>
+          <view class="weui-cell__bd">
+            <view class="weui-uploader">
+                <view class="weui-uploader__hd">
+                    <view class="weui-uploader__title">图片上传</view>
+                    <view class="weui-uploader__info">{{imageFiles.length}}/9</view>
+                </view>
+                <view class="weui-uploader__bd">
+                    <view class="weui-uploader__files" id="uploaderFiles">
+                      <block wx:for-items="{{imageFiles}}" wx:key="{{index}}">
+                          <view class="weui-uploader__file" bindtap="PreviewImage" id="{{item}}">
+                              <image class="weui-uploader__img" src="{{item}}" mode="aspectFill" />
+                          </view>
+                      </block>
+                    <view class="weui-uploader__input-box">
+                        <view class="weui-uploader__input" bindtap="Upload"></view>
+                    </view>
                   </view>
                 </view>
               </view>
