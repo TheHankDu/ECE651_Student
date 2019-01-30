@@ -1,4 +1,44 @@
 // pages/HwSubm.js
+
+const recorderManager = wx.getRecorderManager()
+
+recorderManager.onError(() => {
+  console.log('recorder error')
+  wx.showToast({
+    title: 'Error',
+    icon: 'none'
+  })
+})
+
+recorderManager.onStart(() => {
+  console.log('recorder start')
+  wx.showToast({
+    title: 'Recording',
+    icon: 'loading'
+  })
+})
+
+recorderManager.onPause(() => {
+  console.log('recorder pause')
+})
+
+recorderManager.onStop((res) => {
+  console.log('recorder stop', res)
+  const { tempFilePath } = res
+  that.setData({
+    recordFiles: that.data.recordFiles.concat(tempFilePaths)
+  })
+  /*wx.showToast({
+    title: 'Record Finished',
+    icon: 'success'
+  })*/
+})
+
+recorderManager.onFrameRecorded((res) => {
+  const { frameBuffer } = res
+  console.log('frameBuffer.byteLength', frameBuffer.byteLength)
+})
+
 Page({
 
   /**
@@ -6,6 +46,7 @@ Page({
    */
   data: {
       cloudLink: "",
+      answer: "",
       recordFiles: [],
       imageFiles: []
   },
@@ -52,11 +93,12 @@ Page({
       frameSize: 50
     }
     recorderManager.start(options)
-    
+    console.log('start recording')
   },
 
   StopRecord: function(){
     recorderManager.stop()
+    console.log('stop recording')
   },
 
   tmpImageLoaded: function (res) {
@@ -84,6 +126,7 @@ Page({
     wx.setNavigationBarTitle({
       title: '作业提交',
     })
+    console.log('Load 作业提交')
   },
 
   /**
@@ -134,21 +177,4 @@ Page({
   onShareAppMessage: function () {
 
   }
-})
-
-const recorderManager = wx.getRecorderManager()
-
-recorderManager.onStart(() => {
-  console.log('recorder start')
-})
-recorderManager.onPause(() => {
-  console.log('recorder pause')
-})
-recorderManager.onStop((res) => {
-  console.log('recorder stop', res)
-  const { tempFilePath } = res
-})
-recorderManager.onFrameRecorded((res) => {
-  const { frameBuffer } = res
-  console.log('frameBuffer.byteLength', frameBuffer.byteLength)
 })

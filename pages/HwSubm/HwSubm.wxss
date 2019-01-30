@@ -26,11 +26,6 @@
   font-weight: bold; 
 }
 
-.delete{
-  position: relative;
-
-}
-
 .hr{
   height: 3px;
   width: 375px;

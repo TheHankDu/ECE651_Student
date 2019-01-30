@@ -25,7 +25,7 @@
   overflow: hidden;
 }
 .page_hd{
-  padding: 50rpx 50rpx 50rpx 50rpx;
+  padding: 20rpx 20rpx 20rpx 20rpx;
   text-align: center;
 }
 .page input{
@@ -35,8 +35,8 @@
 }
 .page_title{
   display: inline-block;
+  font-size: 20px;
   padding: 20rpx 40rpx;
-  font-size: 32rpx;
 }
 .section{
     margin-bottom: 30rpx;
