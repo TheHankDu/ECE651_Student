@@ -9,7 +9,8 @@
   color: #414141;
 }
 .list_title{
-  margin-left: 20px;
+  text-align: center;
+  justify-content: center;
 }
 .hr{
   height: 3px;

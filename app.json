@@ -1,6 +1,8 @@
 {
   "pages":[
     "pages/用户中心/用户中心",
+    "pages/ForgotPassword/ForgotPassword",
+    "pages/ChangePassword/ChangePassword",
     "pages/课程/课程",
     "pages/Module/Module",
     "pages/作业列表/作业列表",
@@ -18,7 +20,7 @@
     "navigationBarTextStyle":"black",
     "navigationBarTextSize": "larger",
     "backgroundColor": "#CDE000",
-    "onReachBottomDistance": "10px",
+    "onReachBottomDistance": 10,
     "enablePullDownRefresh":true
   },
   "tabBar":{
