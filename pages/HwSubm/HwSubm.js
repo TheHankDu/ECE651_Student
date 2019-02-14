@@ -1,48 +1,8 @@
 // pages/HwSubm.js
-
-const recorderManager = wx.getRecorderManager()
-
-recorderManager.onError(() => {
-  console.log('recorder error')
-  wx.showToast({
-    title: 'Error',
-    icon: 'none'
-  })
-})
-
-recorderManager.onStart(() => {
-  console.log('recorder start')
-  wx.showToast({
-    title: 'Recording',
-    icon: 'loading'
-  })
-})
-
-recorderManager.onPause(() => {
-  console.log('recorder pause')
-})
-
-recorderManager.onStop((res) => {
-  console.log('recorder stop', res)
-  const { tempFilePath } = res
-  that.setData({
-    recordFiles: that.data.recordFiles.concat(tempFilePaths)
-  })
-  /*wx.showToast({
-    title: 'Record Finished',
-    icon: 'success'
-  })*/
-})
-
-recorderManager.onFrameRecorded((res) => {
-  const { frameBuffer } = res
-  console.log('frameBuffer.byteLength', frameBuffer.byteLength)
-})
-
 Page({
 
   /**
-   * Page initial data
+   * page initial data
    */
   data: {
       cloudLink: "",
@@ -51,7 +11,7 @@ Page({
       imageFiles: []
   },
 
-  Home: function () {
+  home: function () {
     wx.navigateTo({
       url: '../../pages/Course/Course',
       success: function () {
@@ -60,7 +20,7 @@ Page({
     });
   },
 
-  Upload: function () {
+  upload: function () {
     var that = this
     wx.chooseImage({
       count: 3,
@@ -68,21 +28,21 @@ Page({
       sourceType: ['album', 'camera'],
       success: function (res) {
         console.log(res)
-        that.setData({
+        that.setdata({
           imageFiles: that.data.imageFiles.concat(res.tempFilePaths)
         });
       }
     })
   },
 
-  PreviewImage: function (e) {
+  previewImage: function (e) {
     wx.previewImage({
       current: e.currentTarget.id, // 当前显示图片的http链接
       urls: this.data.imageFiles // 需要预览的图片http链接列表
     })
   },
 
-  StartRecord: function (){
+  startRecord: function (){
     const options = {
       duration: 60000,
       sampleRate: 44100,
@@ -92,31 +52,48 @@ Page({
       format: 'aac',
       frameSize: 50
     }
-    recorderManager.start(options)
+    this.recorderManager.start(options)
     console.log('start recording')
   },
 
-  StopRecord: function(){
-    recorderManager.stop()
+  stopRecord: function(){
+    this.recorderManager.stop()
     console.log('stop recording')
+  },
+
+  playRecord: function () {
+    var that = this;
+    var src = this.data.src;
+    if (src == '') {
+      this.tip("请先录音！")
+      return;
+    }
+    this.innerAudioContext.src = this.data.src;
+    this.innerAudioContext.play()
   },
 
   tmpImageLoaded: function (res) {
     console.log(res);
     var width = 250;
     var height = 250 / res.detail.width * res.detail.height
-    this.setData({
+    this.setdata({
       'flexImageSize.width': width + 'rpx',
       'flexImageSize.height': height + 'rpx'
     });
   },
 
-  Delete: function(object){
-    //TODO: Delete exist doc
+  del: function(object){
+    //TODO: delete exist doc
   },
 
-  Submit: function(object){
+  submit: function(object){
     //TODO: Upload every thing to Cloud
+    wx.showToast({
+      title: '上传中',
+      icon: 'loading',
+      duration: 1500
+    });
+    const address = 'https://dingziku.herokuapp.com'
   },
 
   /**
@@ -127,6 +104,46 @@ Page({
       title: '作业提交',
     })
     console.log('Load 作业提交')
+
+    var that = this;
+    this.recorderManager = wx.getRecorderManager();
+    this.recorderManager.onError(() => {
+      console.log('recorder error')
+      wx.showToast({
+        title: 'Error',
+        icon: 'none',
+        duration: 60000
+      })
+    });
+
+    this.recorderManager.onStart(() => {
+      console.log('recorder start')
+      wx.showToast({
+        title: 'Recording',
+        icon: 'loading',
+        duration: 60000
+      })
+    });
+
+    this.recorderManager.onPause(() => {
+      console.log('recorder pause')
+    });
+
+    this.recorderManager.onStop(function (res) {
+      console.log('recorder stop', res)
+      that.setData({
+        recordFiles: that.data.recordFiles.concat(res.tempFilePath)
+        })
+      wx.showToast({
+        title: 'Record Finished',
+        icon: 'success'
+      })
+    });
+
+    this.recorderManager.onFrameRecorded((res) => {
+      const { frameBuffer } = res
+      console.log('frameBuffer.byteLength', frameBuffer.byteLength)
+    });
   },
 
   /**
@@ -158,9 +175,9 @@ Page({
   },
 
   /**
-   * Page event handler function--Called when user drop down
+   * page event handler function--Called when user drop down
    */
-  onPullDownRefresh: function () {
+  onpulldownRefresh: function () {
 
   },
 
@@ -178,3 +195,5 @@ Page({
 
   }
 })
+
+

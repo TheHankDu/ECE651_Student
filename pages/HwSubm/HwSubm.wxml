@@ -34,12 +34,12 @@
             <view class="weui-uploader__bd">
                 <view class="weui-uploader__files" id="uploaderFiles">
                   <block wx:for-items="{{imageFiles}}" wx:key="{{index}}">
-                      <view class="weui-uploader__file" bindtap="PreviewImage" id="{{item}}">
+                      <view class="weui-uploader__file" bindtap="previewImage" id="{{item}}">
                           <image class="weui-uploader__img" src="{{item}}" mode="aspectFill" />
                       </view>
                   </block>
                 <view class="weui-uploader__input-box">
-                    <view class="weui-uploader__input" bindtap="Upload"></view>
+                    <view class="weui-uploader__input" bindtap="upload"></view>
                 </view>
               </view>
             </view>
@@ -52,6 +52,6 @@
       <input placeholder='Enter Answer Here'></input>
     </view>
   </view>
-  <button class="weui-btn" type="warn" bindtouchstart="StartRecord" bindtouchend="StopRecord">按住录音</button>
-  <button class="weui-btn" type='primary'  bindtap="Submit">提交</button>
+  <button class="weui-btn" type="warn" bindtouchstart="startRecord" bindtouchend="stopRecord">按住录音</button>
+  <button class="weui-btn" type='primary'  bindtap="submit">提交</button>
 </view>

@@ -34,7 +34,7 @@ Page({
       icon: 'loading',
       duration: 1500
     });
-    const address = 'https://jovialapp.herokuapp.com'
+    const address = 'https://dingziku.herokuapp.com'
     getApp().globalData.address = address
     this.data.email = 'feng@gdao.com'
     this.data.password = 'gaofeng'
