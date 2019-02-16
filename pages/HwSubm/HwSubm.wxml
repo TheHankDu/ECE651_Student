@@ -12,6 +12,7 @@
           <text>Name: Tony Wang
           Date: 
 
+          <!--{{TODO: Bind with online Description}}-->
           </text>      
         </view>
       </view>
@@ -47,6 +48,22 @@
         </view>
       </view>
     </view>
+    <scroll-view>
+      <view wx:if="{{recordFiles}}" class="common-list" style="margin-bottom:120rpx;">
+      <block wx:key="{{recordFiles}}">
+          <view class="board">
+                        <view class="cell"  >
+                            <view class="cell-bd" data-key="{{item.filePath}}" bindtap="playRecord" > 
+                                <view  class="date">存储路径:{{item.filePath}}</view>
+                                <view  class="date" >存储时间:{{item.createTime}}</view>
+                                <view  class="date">音频大小:{{item.size}}KB</view>
+                            </view>  
+                  
+                        </view>
+              </view>
+      </block>
+      </view>
+    </scroll-view>
   <view class="weui-cells">
     <view class="weui-cell">
       <input placeholder='Enter Answer Here'></input>

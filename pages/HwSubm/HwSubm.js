@@ -61,7 +61,7 @@ Page({
     console.log('stop recording')
   },
 
-  playRecord: function () {
+  playRecord: function (item) {
     var that = this;
     var src = this.data.src;
     if (src == '') {
@@ -84,16 +84,48 @@ Page({
 
   del: function(object){
     //TODO: delete exist doc
+    //Get selected record file path
+    //Delete it in recordFiles
   },
 
   submit: function(object){
-    //TODO: Upload every thing to Cloud
-    wx.showToast({
-      title: '上传中',
-      icon: 'loading',
-      duration: 1500
-    });
     const address = 'https://dingziku.herokuapp.com'
+    var uploadData = JSON.parse(data) //TODO: Convert data into json format
+    wx.request({
+      data:{ 
+        course_id: "", //TODO Bind with global data or somehow
+        homework_id: "", //TODO Bind with global data or somehow
+        content: uploadData
+        
+      },
+      url: address + '/course/homework/submission/submit',
+      method: "POST",
+      header: {
+        'content-type': 'application/x-www-form-urlencoded',
+        'x-access-token': tkn,
+      },
+      success: function (res) {
+        wx.showToast({
+          title: '上传成功',
+          icon: 'success',
+          duration: 1500
+        });
+        console.log('---Submit Successfully---');
+        console.log(res);
+      },
+      fail: function (res) {
+        wx.showToast({
+          title: '上传失败',
+          icon: 'none',
+          duration: 1500
+        });
+        console.log('---Fail---');
+        console.log(res);
+      },
+      complete: function (res) {
+        console.log('---Complete---');
+      }
+    });
   },
 
   /**
