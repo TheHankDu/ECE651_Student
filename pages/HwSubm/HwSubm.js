@@ -90,13 +90,46 @@ Page({
 
   submit: function(object){
     const address = 'https://dingziku.herokuapp.com'
+    const formatted_data = 'joipjpoi'
+    //if(data.cloudLink != "" ){
+    console.log('${formatted_data}')
+    JSON.parse('{"type": "text", "content": ${data.cloudLink}')
+    //if (data.answer != "") {
+    JSON.parse('{"type": "text", "content": ${data.answer}')
+    //}
     var uploadData = JSON.parse(data) //TODO: Convert data into json format
+    /*content: "[ // JSON格式的字符串；原本是数组，每个元素是一个提交的内容，之后会按照相同顺序返回
+    {
+      \"type\": \"text\",
+      \"content\": \"1+1=2\"
+    },
+    {
+      \"type\": \"audio\",
+      \"file_name\": \"a.wav\"
+    },
+    {
+      \"type\": \"text\",
+      \"content\": \"e=mc2\"
+    },
+    {
+      \"type\": \"video\",
+      \"file_name\": \"a.mp4\"
+    },
+    {
+      \"type\": \"image\",
+      \"file_name\": \"a.jpg\"
+    },
+    {
+      \"type\": \"image\",
+      \"file_name\": \"b.jpg\"
+    },
+    ...
+]"*/
     wx.request({
       data:{ 
         course_id: "", //TODO Bind with global data or somehow
         homework_id: "", //TODO Bind with global data or somehow
         content: uploadData
-        
       },
       url: address + '/course/homework/submission/submit',
       method: "POST",
