@@ -49,19 +49,18 @@
       </view>
     </view>
     <scroll-view>
-      <view wx:if="{{recordFiles}}" class="common-list" style="margin-bottom:120rpx;">
-      <block wx:key="{{recordFiles}}">
+      <view class="common-list"  style="margin-bottom:120rpx;">
+        <block wx:for-items="{{recordFiles}}" wx:key="{{index}}">
           <view class="board">
-                        <view class="cell"  >
-                            <view class="cell-bd" data-key="{{item.filePath}}" bindtap="playRecord" > 
-                                <view  class="date">存储路径:{{item.filePath}}</view>
-                                <view  class="date" >存储时间:{{item.createTime}}</view>
-                                <view  class="date">音频大小:{{item.size}}KB</view>
-                            </view>  
-                  
-                        </view>
-              </view>
-      </block>
+            <view class="cell"  >
+                <view class="cell-bd" data-key="{{item}}" bindtap="playRecord" id="{{item}}" > 
+                    <view class="date">存储路径: {{item.tempFilePath}}</view>
+                    <view class="date" >音频时间: {{item.duration}}</view>
+                    <view class="date">音频大小: {{item.fileSize}}KB</view>
+                </view>
+            </view>
+          </view>
+        </block>
       </view>
     </scroll-view>
   <view class="weui-cells">

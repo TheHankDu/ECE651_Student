@@ -1,4 +1,6 @@
 // pages/HwSubm.js
+const recorderManager = wx.getRecorderManager()
+const innerAudioContext = wx.createInnerAudioContext()
 Page({
 
   /**
@@ -28,7 +30,7 @@ Page({
       sourceType: ['album', 'camera'],
       success: function (res) {
         console.log(res)
-        that.setdata({
+        that.setData({
           imageFiles: that.data.imageFiles.concat(res.tempFilePaths)
         });
       }
@@ -52,24 +54,27 @@ Page({
       format: 'aac',
       frameSize: 50
     }
-    this.recorderManager.start(options)
+    recorderManager.start(options)
     console.log('start recording')
   },
 
   stopRecord: function(){
-    this.recorderManager.stop()
+    recorderManager.stop()
     console.log('stop recording')
   },
 
   playRecord: function (item) {
-    var that = this;
-    var src = this.data.src;
+    console.log('start playing recorded sound track')
+    var src = item.tempFilePath;
+    console.log(item)
     if (src == '') {
-      this.tip("请先录音！")
+      wx.showToast({
+        title: '请先录音！',
+      })
       return;
     }
-    this.innerAudioContext.src = this.data.src;
-    this.innerAudioContext.play()
+    innerAudioContext.src = src;
+    innerAudioContext.play()
   },
 
   tmpImageLoaded: function (res) {
@@ -90,14 +95,34 @@ Page({
 
   submit: function(object){
     const address = 'https://dingziku.herokuapp.com'
-    const formatted_data = 'joipjpoi'
-    //if(data.cloudLink != "" ){
-    console.log('${formatted_data}')
-    JSON.parse('{"type": "text", "content": ${data.cloudLink}')
-    //if (data.answer != "") {
-    JSON.parse('{"type": "text", "content": ${data.answer}')
-    //}
-    var uploadData = JSON.parse(data) //TODO: Convert data into json format
+    var formatted_data = JSON.parse('')
+    if(data.cloudLink != "" ){
+      formatted_data += JSON.parse('{"type": "text", "content": ' + data.cloudLink + '}')
+    }
+    for(var i = 0; i < data.recordFiles.length; i++){
+      var date = new Date();
+      file_name = date.getFullYear + '-' + date.getMonth() + '-' + date.getDay + '-' + i + '.aac'
+      wx.uploadFile({
+        url: '', // TODO: Uploaded url
+        filePath: data.recordFiles[i].tempFilePaths,
+        name: file_name,
+      })
+      formatted_data += JSON.parse('{"type": "audio", "file_name": ' + file_name + '}')
+    }
+    if (data.answer != "") {
+      formatted_data += JSON.parse('{"type": "text", "content": ' + data.answer + '}')
+    }
+    for (var i = 0; i < data.imageFiles.length; i++) {
+      var date = new Date();
+      file_name = date.getFullYear + '-' + date.getMonth() + '-' + date.getDay + '-' + i + '.jpg'
+      wx.uploadFile({
+        url: '', // TODO: Uploaded url
+        filePath: data.imageFiles[i],
+        name: file_name,
+      })
+      formatted_data += JSON.parse('{"type": "image", "file_name": ' + file_name + '}')
+    }
+    
     /*content: "[ // JSON格式的字符串；原本是数组，每个元素是一个提交的内容，之后会按照相同顺序返回
     {
       \"type\": \"text\",
@@ -127,9 +152,9 @@ Page({
 ]"*/
     wx.request({
       data:{ 
-        course_id: "", //TODO Bind with global data or somehow
-        homework_id: "", //TODO Bind with global data or somehow
-        content: uploadData
+        course_id: '', //TODO Bind with global data or somehow
+        homework_id: '', //TODO Bind with global data or somehow
+        content: formatted_data
       },
       url: address + '/course/homework/submission/submit',
       method: "POST",
@@ -171,17 +196,18 @@ Page({
     console.log('Load 作业提交')
 
     var that = this;
-    this.recorderManager = wx.getRecorderManager();
-    this.recorderManager.onError(() => {
+
+    recorderManager.onError((res) => {
       console.log('recorder error')
+      console.log(res)
       wx.showToast({
         title: 'Error',
         icon: 'none',
-        duration: 60000
+        duration: 1000
       })
     });
 
-    this.recorderManager.onStart(() => {
+    recorderManager.onStart(() => {
       console.log('recorder start')
       wx.showToast({
         title: 'Recording',
@@ -190,14 +216,14 @@ Page({
       })
     });
 
-    this.recorderManager.onPause(() => {
+    recorderManager.onPause(() => {
       console.log('recorder pause')
     });
 
-    this.recorderManager.onStop(function (res) {
+    recorderManager.onStop(function (res) {
       console.log('recorder stop', res)
       that.setData({
-        recordFiles: that.data.recordFiles.concat(res.tempFilePath)
+        recordFiles: that.data.recordFiles.concat(res)
         })
       wx.showToast({
         title: 'Record Finished',
@@ -205,7 +231,7 @@ Page({
       })
     });
 
-    this.recorderManager.onFrameRecorded((res) => {
+    recorderManager.onFrameRecorded((res) => {
       const { frameBuffer } = res
       console.log('frameBuffer.byteLength', frameBuffer.byteLength)
     });
