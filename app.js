@@ -34,6 +34,7 @@ App({
     })
   },
   globalData: {
+   //haha
     token: '',
     address: '',
     currentCourse: null,
