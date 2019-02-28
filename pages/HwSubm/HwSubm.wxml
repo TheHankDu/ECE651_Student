@@ -20,7 +20,25 @@
     <view class="weui-cell">
       <input placeholder="Link to Baidu Cloud:"></input>
     </view>
+    <view class="weui-cell">
+      <input placeholder='Enter Answer Here'></input>
+    </view>
   </view>
+  <scroll-view>
+        <view class="common-list">
+          <block wx:for-items="{{recordFiles}}" wx:key="{{index}}">
+            <view class="board">
+              <view class="cell"  >
+                  <view class="cell-bd" bindtap="playRecord" id="{{item.tempFilePath}}" > 
+                      <view class="date">存储路径: {{item.tempFilePath}}</view>
+                      <view class="date" >音频时间: {{item.duration}}</view>
+                      <view class="date">音频大小: {{item.fileSize}}KB</view>
+                  </view>
+              </view>
+            </view>
+          </block>
+        </view>
+      </scroll-view>
 </view>
 
 <view class="page__bd">
@@ -35,7 +53,7 @@
             <view class="weui-uploader__bd">
                 <view class="weui-uploader__files" id="uploaderFiles">
                   <block wx:for-items="{{imageFiles}}" wx:key="{{index}}">
-                      <view class="weui-uploader__file" bindtap="previewImage" id="{{item}}">
+                      <view class="weui-uploader__file" bindtap="previewImage" bindlongpress="delImage" id="{{item}}">
                           <image class="weui-uploader__img" src="{{item}}" mode="aspectFill" />
                       </view>
                   </block>
@@ -48,26 +66,7 @@
         </view>
       </view>
     </view>
-    <scroll-view>
-      <view class="common-list"  style="margin-bottom:120rpx;">
-        <block wx:for-items="{{recordFiles}}" wx:key="{{index}}">
-          <view class="board">
-            <view class="cell"  >
-                <view class="cell-bd" data-key="{{item}}" bindtap="playRecord" id="{{item}}" > 
-                    <view class="date">存储路径: {{item.tempFilePath}}</view>
-                    <view class="date" >音频时间: {{item.duration}}</view>
-                    <view class="date">音频大小: {{item.fileSize}}KB</view>
-                </view>
-            </view>
-          </view>
-        </block>
-      </view>
-    </scroll-view>
-  <view class="weui-cells">
-    <view class="weui-cell">
-      <input placeholder='Enter Answer Here'></input>
-    </view>
-  </view>
+
   <button class="weui-btn" type="warn" bindtouchstart="startRecord" bindtouchend="stopRecord">按住录音</button>
   <button class="weui-btn" type='primary'  bindtap="submit">提交</button>
 </view>

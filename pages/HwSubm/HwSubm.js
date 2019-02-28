@@ -1,6 +1,14 @@
 // pages/HwSubm.js
 const recorderManager = wx.getRecorderManager()
 const innerAudioContext = wx.createInnerAudioContext()
+
+innerAudioContext.onPlay(() => {
+  console.log('开始播放')
+})
+innerAudioContext.onError((res) => {
+  console.log(res.errMsg)
+  console.log(res.errCode)
+})
 Page({
 
   /**
@@ -13,6 +21,9 @@ Page({
       imageFiles: []
   },
 
+  /*
+  * Home button function
+  */
   home: function () {
     wx.navigateTo({
       url: '../../pages/Course/Course',
@@ -22,6 +33,9 @@ Page({
     });
   },
 
+  /* 
+  * 图片上传
+  */
   upload: function () {
     var that = this
     wx.chooseImage({
@@ -37,13 +51,37 @@ Page({
     })
   },
 
+  /*
+  * View Image that are being selected
+  */
   previewImage: function (e) {
+    console.log(e.currentTarget)
     wx.previewImage({
       current: e.currentTarget.id, // 当前显示图片的http链接
       urls: this.data.imageFiles // 需要预览的图片http链接列表
     })
   },
 
+  /*
+  * Delete Image when long press 
+  */
+  delImage: function (e) {
+    var that = this
+    var index = e.currentTarget.dataset.index
+    var tmp = that.data.imageFiles
+    tmp.splice(index,1)
+
+    that.setData({
+      imageFiles: tmp
+    });
+    //TODO: delete exist doc
+    //Get selected record file path
+    //Delete it in recordFiles
+  },
+
+  /*
+  * Start recorderManager and recording
+  */
   startRecord: function (){
     const options = {
       duration: 60000,
@@ -58,23 +96,28 @@ Page({
     console.log('start recording')
   },
 
+  /* 
+  * Stop recorderManager and store recorded file
+  */ 
   stopRecord: function(){
     recorderManager.stop()
     console.log('stop recording')
   },
 
+  /*
+  * Play selected recorded file
+  */
   playRecord: function (item) {
-    console.log('start playing recorded sound track')
-    var src = item.tempFilePath;
-    console.log(item)
-    if (src == '') {
+    var src = item.currentTarget.id;
+    console.log(src)
+    if (!src) {
       wx.showToast({
         title: '请先录音！',
       })
       return;
     }
-    innerAudioContext.src = src;
-    innerAudioContext.play()
+    innerAudioContext.src = src
+    innerAudioContext.play() //To be diagnosed 
   },
 
   tmpImageLoaded: function (res) {
@@ -93,63 +136,42 @@ Page({
     //Delete it in recordFiles
   },
 
+  /*
+  * Submit Function
+  */
   submit: function(object){
     const address = 'https://dingziku.herokuapp.com'
-    var formatted_data = JSON.parse('')
-    if(data.cloudLink != "" ){
-      formatted_data += JSON.parse('{"type": "text", "content": ' + data.cloudLink + '}')
+    //var formatted_data = JSON.parse('') // Cannot parse empty string
+    if(this.data.cloudLink != "" ){
+      var formatted_data = JSON.parse('{"type": "text", "content": ' + data.cloudLink + '}')
     }
-    for(var i = 0; i < data.recordFiles.length; i++){
+    for(var i = 0; i < this.data.recordFiles.length; i++){
       var date = new Date();
       file_name = date.getFullYear + '-' + date.getMonth() + '-' + date.getDay + '-' + i + '.aac'
       wx.uploadFile({
         url: '', // TODO: Uploaded url
-        filePath: data.recordFiles[i].tempFilePaths,
+        filePath: this.data.recordFiles[i].tempFilePaths,
         name: file_name,
       })
       formatted_data += JSON.parse('{"type": "audio", "file_name": ' + file_name + '}')
     }
-    if (data.answer != "") {
+    if (this.data.answer != "") {
       formatted_data += JSON.parse('{"type": "text", "content": ' + data.answer + '}')
     }
-    for (var i = 0; i < data.imageFiles.length; i++) {
+    for (var i = 0; i < this.data.imageFiles.length; i++) {
       var date = new Date();
-      file_name = date.getFullYear + '-' + date.getMonth() + '-' + date.getDay + '-' + i + '.jpg'
+      file_name = date.getFullYear + '-' + date.getMonth() + '-' + date.getDay + '-' + i + data.imageFiles[i].tempFilePaths.split('.').pop()
       wx.uploadFile({
         url: '', // TODO: Uploaded url
-        filePath: data.imageFiles[i],
+        filePath: this.data.imageFiles[i],
         name: file_name,
       })
       formatted_data += JSON.parse('{"type": "image", "file_name": ' + file_name + '}')
     }
-    
-    /*content: "[ // JSON格式的字符串；原本是数组，每个元素是一个提交的内容，之后会按照相同顺序返回
-    {
-      \"type\": \"text\",
-      \"content\": \"1+1=2\"
-    },
-    {
-      \"type\": \"audio\",
-      \"file_name\": \"a.wav\"
-    },
-    {
-      \"type\": \"text\",
-      \"content\": \"e=mc2\"
-    },
-    {
-      \"type\": \"video\",
-      \"file_name\": \"a.mp4\"
-    },
-    {
-      \"type\": \"image\",
-      \"file_name\": \"a.jpg\"
-    },
-    {
-      \"type\": \"image\",
-      \"file_name\": \"b.jpg\"
-    },
-    ...
-]"*/
+
+    /*
+    * Request to upload all hw info to backend
+    */
     wx.request({
       data:{ 
         course_id: '', //TODO Bind with global data or somehow
