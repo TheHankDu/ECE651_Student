@@ -29,7 +29,7 @@
           <block wx:for-items="{{recordFiles}}" wx:key="{{index}}">
             <view class="board">
               <view class="cell"  >
-                  <view class="cell-bd" bindtap="playRecord" id="{{item.tempFilePath}}" > 
+                  <view class="cell-bd" bindtap="playRecord" bindlongpress="delRecord" id="{{item.tempFilePath}}" > 
                       <view class="date">存储路径: {{item.tempFilePath}}</view>
                       <view class="date" >音频时间: {{item.duration}}</view>
                       <view class="date">音频大小: {{item.fileSize}}KB</view>
@@ -58,7 +58,7 @@
                       </view>
                   </block>
                 <view class="weui-uploader__input-box">
-                    <view class="weui-uploader__input" bindtap="upload"></view>
+                    <view class="weui-uploader__input" bindtap="loadImage"></view>
                 </view>
               </view>
             </view>

@@ -36,7 +36,7 @@ Page({
   /* 
   * 图片上传
   */
-  upload: function () {
+  loadImage: function () {
     var that = this
     wx.chooseImage({
       count: 3,
@@ -49,6 +49,16 @@ Page({
         });
       }
     })
+  },
+
+  tmpImageLoaded: function (res) {
+    console.log(res);
+    var width = 250;
+    var height = 250 / res.detail.width * res.detail.height
+    this.setdata({
+      'flexImageSize.width': width + 'rpx',
+      'flexImageSize.height': height + 'rpx'
+    });
   },
 
   /*
@@ -74,9 +84,6 @@ Page({
     that.setData({
       imageFiles: tmp
     });
-    //TODO: delete exist doc
-    //Get selected record file path
-    //Delete it in recordFiles
   },
 
   /*
@@ -120,13 +127,17 @@ Page({
     innerAudioContext.play() //To be diagnosed 
   },
 
-  tmpImageLoaded: function (res) {
-    console.log(res);
-    var width = 250;
-    var height = 250 / res.detail.width * res.detail.height
-    this.setdata({
-      'flexImageSize.width': width + 'rpx',
-      'flexImageSize.height': height + 'rpx'
+/*
+* Delete Recorded sound track when long press 
+*/
+  delRecord: function (e) {
+    var that = this
+    var index = e.currentTarget.dataset.index
+    var tmp = that.data.recordFiles
+    tmp.splice(index, 1)
+
+    that.setData({
+      recordFiles: tmp
     });
   },
 
