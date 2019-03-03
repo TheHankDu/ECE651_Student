@@ -5,16 +5,7 @@ Page({
    * 页面的初始数据
    */
   data: {
-    GradeArray: [
-      {
-        str: 'Assignment 1: Grade',
-        styleClass: 'list_title'
-      },
-      {
-        str: 'Assignment 2: Grade',
-        styleClass: 'list_title'
-      }
-    ]
+    GradeArray: []
   },
 
  
@@ -42,9 +33,25 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    wx.setNavigationBarTitle({
-      title: '成绩列表',
+    var that = this;
+    const address = getApp().globalData.address
+    wx.request({
+      url: address + '/course/homework/submission/get_self',
+      data:{
+        course_id: getApp().globalData.currentCourse
+      },
+      method: "GET",
+      header: {
+        //'content-type': 'application/x-www-form-urlencoded',
+        'cookie': getApp().globalData.cookie
+      },
+      success: function(res) {
+        var sl = that.data.GradeArray
+        console.log(res.data.submissions)
+        sl.push(res.data.submissions)
+      }
     })
+    
   },
 
   /**
@@ -58,7 +65,9 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-
+    wx.setNavigationBarTitle({
+      title: '成绩列表',
+    })
   },
 
   /**
