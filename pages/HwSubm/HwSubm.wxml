@@ -9,8 +9,7 @@
     <view class="weui-cell">
       <view class="weui-article">
         <view class="weui-article__p">
-          <text>Name: Tony Wang
-          Date: 
+          <text>Assignment Description
 
           <!--{{TODO: Bind with online Description}}-->
           </text>      

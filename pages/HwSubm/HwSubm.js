@@ -1,24 +1,17 @@
 // pages/HwSubm.js
-const recorderManager = wx.getRecorderManager()
-const innerAudioContext = wx.createInnerAudioContext()
 
-innerAudioContext.onPlay(() => {
-  console.log('开始播放')
-})
-innerAudioContext.onError((res) => {
-  console.log(res.errMsg)
-  console.log(res.errCode)
-})
 Page({
 
   /**
    * page initial data
    */
   data: {
-      cloudLink: "",
-      answer: "",
-      recordFiles: [],
-      imageFiles: []
+    course_id: '',
+    homework_id: '',
+    cloudLink: '',
+    answer: '',
+    recordFiles: [],
+    imageFiles: []
   },
 
   /*
@@ -99,7 +92,7 @@ Page({
       format: 'aac',
       frameSize: 50
     }
-    recorderManager.start(options)
+    this.recorderManager.start(options)
     console.log('start recording')
   },
 
@@ -107,7 +100,7 @@ Page({
   * Stop recorderManager and store recorded file
   */ 
   stopRecord: function(){
-    recorderManager.stop()
+    this.recorderManager.stop()
     console.log('stop recording')
   },
 
@@ -123,8 +116,8 @@ Page({
       })
       return;
     }
-    innerAudioContext.src = src
-    innerAudioContext.play() //To be diagnosed 
+    this.innerAudioContext.src = src
+    this.innerAudioContext.play() //To be diagnosed 
   },
 
 /*
@@ -143,8 +136,6 @@ Page({
 
   del: function(object){
     //TODO: delete exist doc
-    //Get selected record file path
-    //Delete it in recordFiles
   },
 
   /*
@@ -152,9 +143,9 @@ Page({
   */
   submit: function(object){
     const address = 'https://dingziku.herokuapp.com'
-    //var formatted_data = JSON.parse('') // Cannot parse empty string
+    var formatted_data = JSON.parse('{}') // Cannot parse empty string
     if(this.data.cloudLink != "" ){
-      var formatted_data = JSON.parse('{"type": "text", "content": ' + data.cloudLink + '}')
+      formatted_data = JSON.parse('{"type": "text", "content": ' + data.cloudLink + '}')
     }
     for(var i = 0; i < this.data.recordFiles.length; i++){
       var date = new Date();
@@ -185,8 +176,8 @@ Page({
     */
     wx.request({
       data:{ 
-        course_id: '', //TODO Bind with global data or somehow
-        homework_id: '', //TODO Bind with global data or somehow
+        course_id: this.data.course_id, //TODO Bind with global data or somehow
+        homework_id: this.data.homework_id, //TODO Bind with global data or somehow
         content: formatted_data
       },
       url: address + '/course/homework/submission/submit',
@@ -223,6 +214,10 @@ Page({
    * Lifecycle function--Called when page load
    */
   onLoad: function (options) {
+    this.setData({
+      course_id: options.course_id,
+      homework_id: options.homework_id 
+    })
     wx.setNavigationBarTitle({
       title: '作业提交',
     })
@@ -230,7 +225,18 @@ Page({
 
     var that = this;
 
-    recorderManager.onError((res) => {
+    this.recorderManager = wx.getRecorderManager()
+    this.innerAudioContext = wx.createInnerAudioContext()
+
+    this.innerAudioContext.onPlay(() => {
+      console.log('开始播放')
+    })
+    this.innerAudioContext.onError((res) => {
+      console.log(res.errMsg)
+      console.log(res.errCode)
+    })
+
+    this.recorderManager.onError((res) => {
       console.log('recorder error')
       console.log(res)
       wx.showToast({
@@ -240,7 +246,7 @@ Page({
       })
     });
 
-    recorderManager.onStart(() => {
+    this.recorderManager.onStart(() => {
       console.log('recorder start')
       wx.showToast({
         title: 'Recording',
@@ -249,11 +255,11 @@ Page({
       })
     });
 
-    recorderManager.onPause(() => {
+    this.recorderManager.onPause(() => {
       console.log('recorder pause')
     });
 
-    recorderManager.onStop(function (res) {
+    this.recorderManager.onStop(function (res) {
       console.log('recorder stop', res)
       that.setData({
         recordFiles: that.data.recordFiles.concat(res)
@@ -264,7 +270,7 @@ Page({
       })
     });
 
-    recorderManager.onFrameRecorded((res) => {
+    this.recorderManager.onFrameRecorded((res) => {
       const { frameBuffer } = res
       console.log('frameBuffer.byteLength', frameBuffer.byteLength)
     });

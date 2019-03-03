@@ -7,19 +7,23 @@ Page({
    */
 
   data: {
+    course_id:'',
     AssignmentArray: [
       {
         str: 'A1',
+        homework_id: '',
         status: 1,
         styleClass: 'list_title'
       },
       {
         str: 'A2',
+        homework_id: '',
         status: 2,
         styleClass: 'list_title'
       },
       {
         str: 'A3',
+        homework_id: '',
         status: 3,
         styleClass: 'list_title'
       }
