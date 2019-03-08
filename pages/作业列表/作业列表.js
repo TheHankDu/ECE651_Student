@@ -5,20 +5,7 @@ Page({
    * 页面的初始数据
    */
   data: {
-    AssignmentArray: [
-      {
-        str: 'Assignment 1: Due: 10/18/2018 9:59',
-        styleClass: 'list_title'
-      },
-      {
-        str: 'Assignment 2: Due: 12/25/2018 23:59',
-        styleClass: 'list_title'
-      },
-      {
-        str: 'Assignment 3: Due: 12/31/2018 23:59',
-        styleClass: 'list_title'
-      }
-    ] 
+    AssignmentArray: [] 
   },
 
   Assignment: function () {
@@ -43,6 +30,35 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
+    var that = this
+    const address = getApp().globalData.address
+    wx.request({
+      url: address + '/course/homework/get_all',
+      data: {
+        course_id: getApp().globalData.currentCourse,
+      },
+      header: {
+        //'content-type': 'application/x-www-form-urlencoded',
+        'cookie': getApp().globalData.cookie
+      },
+      method: "GET",
+      success: function (res) {
+        console.log(res)
+        var ALT = [];
+        var getHomeworkLength = res.data.homeworks.length;
+        for (var i = 0; i < getHomeworkLength; i++) {
+          if (res.data.homeworks[i].deadline.length > 10) {
+            res.data.homeworks[i].deadline = res.data.homeworks[i].deadline.substring(0, 10);
+          }
+        }
+        ALT.push(res.data.homeworks)
+        that.setData({
+          AssignmentArray: ALT[0]
+        })
+        console.log(that.data.AssignmentArray)
+
+      }, 
+    })
     wx.setNavigationBarTitle({
       title: '作业列表',
     })

@@ -37,6 +37,7 @@ App({
     token: '',
     address: '',
     currentCourse: null,
+    currentHomework: null,
     announcement: null,
     Email: '',
     VerifyCode: '',
