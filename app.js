@@ -38,6 +38,7 @@ App({
     address: '',
     currentCourse: null,
     currentHomework: null,
+    currentSubmission:null,
     announcement: null,
     Email: '',
     VerifyCode: '',

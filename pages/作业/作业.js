@@ -53,7 +53,7 @@ Page({
   
   onLoad: function (options) {
     wx.setNavigationBarTitle({
-      title: '作业详情',
+      title: '作业',
     })
   },
 

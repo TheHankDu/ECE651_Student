@@ -5,24 +5,7 @@ Page({
    * 页面的初始数据
    */
   data: {
-    GradeArray: [
-      {
-        str: 'Score: 95',
-        styleClass: 'list_title'
-      },
-      {
-        str: 'Highest: 100',
-        styleClass: 'list_title'
-      },
-      {
-        str: 'Lowest: 72',
-        styleClass: 'list_title'
-      }, 
-      {
-        str: 'Average: 88',
-        styleClass: 'list_title'
-      }
-    ]
+    GradeArray: []
   },
 
   Home: function () {
@@ -38,6 +21,21 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
+    var that = this
+    const address = getApp().globalData.address
+    wx.request({
+      url: '',
+      data:{
+        course_id: getApp().globalData.currentCourse, // 字符串，课程ID
+        homework_id: getApp().globalData.currentHomework,// 字符串，作业ID
+        submission_id: ""
+      },
+      header: {
+        //'content-type': 'application/x-www-form-urlencoded',
+        'cookie': getApp().globalData.cookie
+      },
+      method: "GET",
+    })
     wx.setNavigationBarTitle({
       title: '成绩',
     })

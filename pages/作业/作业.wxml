@@ -8,9 +8,10 @@
  
 <view class="doc-content">
   <text>Description:</text>
+  <text></text>
 </view>
 <view class="hr"></view>
-
+ 
 
 <view class="doc-content">
   <input placeholder="Answer:"></input>
