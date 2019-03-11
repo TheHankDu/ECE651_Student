@@ -143,30 +143,49 @@ Page({
   */
   submit: function(object){
     const address = 'https://dingziku.herokuapp.com'
+    const cloudAddress = '<BucketName>' + '.bj.bcebos.com' // TODO: Uploaded url
     var formatted_data = JSON.parse('{}') // Cannot parse empty string
+
     if(this.data.cloudLink != "" ){
       formatted_data = JSON.parse('{"type": "text", "content": ' + data.cloudLink + '}')
     }
+
     for(var i = 0; i < this.data.recordFiles.length; i++){
       var date = new Date();
       file_name = date.getFullYear + '-' + date.getMonth() + '-' + date.getDay + '-' + i + '.aac'
       wx.uploadFile({
-        url: '', // TODO: Uploaded url
+        url: cloudAddress, 
         filePath: this.data.recordFiles[i].tempFilePaths,
-        name: file_name,
+        name: 'file',
+
       })
       formatted_data += JSON.parse('{"type": "audio", "file_name": ' + file_name + '}')
     }
+
     if (this.data.answer != "") {
       formatted_data += JSON.parse('{"type": "text", "content": ' + data.answer + '}')
     }
+
     for (var i = 0; i < this.data.imageFiles.length; i++) {
       var date = new Date();
       file_name = date.getFullYear + '-' + date.getMonth() + '-' + date.getDay + '-' + i + data.imageFiles[i].tempFilePaths.split('.').pop()
       wx.uploadFile({
-        url: '', // TODO: Uploaded url
+        url: cloudAddress,
         filePath: this.data.imageFiles[i],
-        name: file_name,
+        name: 'file',
+        formData: {
+          accessKey: '百度云提供的ak',
+          policy: '上面提到的base64字符串',
+          signature: '上面提到的signature签名',
+          key: '文件保存在BOS中的文件名',    // 注意：这个key必须与policy中的key保持一致，否则会报错
+          'Content-Type': 'image/png' // 可以不指定，BOS会自动判断
+        },
+        success:function(res){
+          console.log(res)
+        },
+        fail:function(res){
+          console.log(res)
+        }
       })
       formatted_data += JSON.parse('{"type": "image", "file_name": ' + file_name + '}')
     }
@@ -214,10 +233,10 @@ Page({
    * Lifecycle function--Called when page load
    */
   onLoad: function (options) {
-    this.setData({
+    /*this.setData({
       course_id: options.course_id,
       homework_id: options.homework_id 
-    })
+    })*/
     wx.setNavigationBarTitle({
       title: '作业提交',
     })

@@ -46,7 +46,7 @@
       <view class="weui-cell__bd">
         <view class="weui-uploader">
             <view class="weui-uploader__hd">
-                <view class="weui-uploader__title">图片上传</view>
+                <view class="weui-uploader__title">Images</view>
                 <view class="weui-uploader__info">{{imageFiles.length}}/9</view>
             </view>
             <view class="weui-uploader__bd">
@@ -66,6 +66,6 @@
       </view>
     </view>
 
-  <button class="weui-btn" type="warn" bindtouchstart="startRecord" bindtouchend="stopRecord">按住录音</button>
-  <button class="weui-btn" type='primary'  bindtap="submit">提交</button>
+  <button class="weui-btn" type="warn" bindtouchstart="startRecord" bindtouchend="stopRecord">Press to Record</button>
+  <button class="weui-btn" type='primary'  bindtap="submit">Submit</button>
 </view>

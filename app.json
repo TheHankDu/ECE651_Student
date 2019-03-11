@@ -18,7 +18,6 @@
     "navigationBarBackgroundColor": "#9E9E9E",
     "navigationBarTitleText": "Jovial",
     "navigationBarTextStyle": "black",
-    "navigationBarTextSize": "larger",
     "backgroundColor": "#CDE000",
     "onReachBottomDistance": 10,
     "enablePullDownRefresh": true
