@@ -26,6 +26,15 @@ Page({
     });
   },
 
+  /*
+  *回答文本
+  */
+  bindKeyInput(e) {
+    this.setData({
+      answer: e.detail.value
+    })
+  },
+
   /* 
   * 图片上传
   */
@@ -145,10 +154,9 @@ Page({
     const address = 'https://dingziku.herokuapp.com'
     const cloudAddress = '<BucketName>' + '.bj.bcebos.com' // TODO: Uploaded url
     var formatted_data = JSON.parse('{}') // Cannot parse empty string
-
-    if(this.data.cloudLink != "" ){
-      formatted_data = JSON.parse('{"type": "text", "content": ' + data.cloudLink + '}')
-    }
+    var policy = '{"expiration":"2018-05-01T12:00:00Z","conditions":[{"bucket":"你的bucket名称"},{"key":"文件保存在BOS中的文件名"}]}'
+    var base64Policy = base64.encode(policy)
+    var signature = CryptoJS.HmacSHA256("base64Policy", "百度云的SK").toString(CryptoJS.enc.Hex)
 
     for(var i = 0; i < this.data.recordFiles.length; i++){
       var date = new Date();
@@ -157,6 +165,18 @@ Page({
         url: cloudAddress, 
         filePath: this.data.recordFiles[i].tempFilePaths,
         name: 'file',
+        formData: {
+          accessKey: '百度云提供的ak',
+          policy: base64Policy,
+          signature: signature,
+          key: '文件保存在BOS中的文件名',    // 注意：这个key必须与policy中的key保持一致，否则会报错
+        },
+        success: function (res) {
+          console.log(res)
+        },
+        fail: function (res) {
+          console.log(res)
+        }
 
       })
       formatted_data += JSON.parse('{"type": "audio", "file_name": ' + file_name + '}')
@@ -175,10 +195,10 @@ Page({
         name: 'file',
         formData: {
           accessKey: '百度云提供的ak',
-          policy: '上面提到的base64字符串',
-          signature: '上面提到的signature签名',
+          policy: base64Policy,
+          signature: signature,
           key: '文件保存在BOS中的文件名',    // 注意：这个key必须与policy中的key保持一致，否则会报错
-          'Content-Type': 'image/png' // 可以不指定，BOS会自动判断
+          'Content-Type': 'image'
         },
         success:function(res){
           console.log(res)

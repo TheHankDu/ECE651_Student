@@ -17,10 +17,7 @@
       </view>
     </view>
     <view class="weui-cell">
-      <input placeholder="Link to Baidu Cloud:"></input>
-    </view>
-    <view class="weui-cell">
-      <input placeholder='Enter Answer Here'></input>
+      <input bindinput='bindKeyInput' placeholder='Enter Answer Here'></input>
     </view>
   </view>
   <scroll-view>
