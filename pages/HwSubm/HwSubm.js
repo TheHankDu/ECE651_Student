@@ -15,20 +15,20 @@ Page({
   },
 
   /*
-  * Home button function
-  */
-  home: function () {
+   * Home button function
+   */
+  home: function() {
     wx.navigateTo({
       url: '../../pages/Course/Course',
-      success: function () {
+      success: function() {
         console.log("From HwSubm to Course");
       }
     });
   },
 
   /*
-  *回答文本
-  */
+   *回答文本
+   */
   bindKeyInput(e) {
     this.setData({
       answer: e.detail.value
@@ -36,15 +36,15 @@ Page({
   },
 
   /* 
-  * 图片上传
-  */
-  loadImage: function () {
+   * 图片上传
+   */
+  loadImage: function() {
     var that = this
     wx.chooseImage({
       count: 3,
       sizeType: ['original', 'compressed'],
       sourceType: ['album', 'camera'],
-      success: function (res) {
+      success: function(res) {
         console.log(res)
         that.setData({
           imageFiles: that.data.imageFiles.concat(res.tempFilePaths)
@@ -53,7 +53,7 @@ Page({
     })
   },
 
-  tmpImageLoaded: function (res) {
+  tmpImageLoaded: function(res) {
     console.log(res);
     var width = 250;
     var height = 250 / res.detail.width * res.detail.height
@@ -64,9 +64,9 @@ Page({
   },
 
   /*
-  * View Image that are being selected
-  */
-  previewImage: function (e) {
+   * View Image that are being selected
+   */
+  previewImage: function(e) {
     console.log(e.currentTarget)
     wx.previewImage({
       current: e.currentTarget.id, // 当前显示图片的http链接
@@ -75,13 +75,13 @@ Page({
   },
 
   /*
-  * Delete Image when long press 
-  */
-  delImage: function (e) {
+   * Delete Image when long press 
+   */
+  delImage: function(e) {
     var that = this
     var index = e.currentTarget.dataset.index
     var tmp = that.data.imageFiles
-    tmp.splice(index,1)
+    tmp.splice(index, 1)
 
     that.setData({
       imageFiles: tmp
@@ -89,9 +89,9 @@ Page({
   },
 
   /*
-  * Start recorderManager and recording
-  */
-  startRecord: function (){
+   * Start recorderManager and recording
+   */
+  startRecord: function() {
     const options = {
       duration: 60000,
       sampleRate: 44100,
@@ -106,17 +106,17 @@ Page({
   },
 
   /* 
-  * Stop recorderManager and store recorded file
-  */ 
-  stopRecord: function(){
+   * Stop recorderManager and store recorded file
+   */
+  stopRecord: function() {
     this.recorderManager.stop()
     console.log('stop recording')
   },
 
   /*
-  * Play selected recorded file
-  */
-  playRecord: function (item) {
+   * Play selected recorded file
+   */
+  playRecord: function(item) {
     var src = item.currentTarget.id;
     console.log(src)
     if (!src) {
@@ -129,10 +129,10 @@ Page({
     this.innerAudioContext.play() //To be diagnosed 
   },
 
-/*
-* Delete Recorded sound track when long press 
-*/
-  delRecord: function (e) {
+  /*
+   * Delete Recorded sound track when long press 
+   */
+  delRecord: function(e) {
     var that = this
     var index = e.currentTarget.dataset.index
     var tmp = that.data.recordFiles
@@ -143,53 +143,56 @@ Page({
     });
   },
 
-  del: function(object){
+  del: function(object) {
     //TODO: delete exist doc
   },
 
   /*
-  * Submit Function
-  */
-  submit: function(object){
+   * Submit Function
+   */
+  submit: function(object) {
     const address = 'https://dingziku.herokuapp.com'
-    const cloudAddress = '<BucketName>' + '.bj.bcebos.com' // TODO: Uploaded url
-    var formatted_data = JSON.parse('{}') // Cannot parse empty string
-    var policy = '{"expiration":"2018-05-01T12:00:00Z","conditions":[{"bucket":"你的bucket名称"},{"key":"文件保存在BOS中的文件名"}]}'
-    var base64Policy = base64.encode(policy)
-    var signature = CryptoJS.HmacSHA256("base64Policy", "百度云的SK").toString(CryptoJS.enc.Hex)
+    // const cloudAddress = '<BucketName>' + '.bj.bcebos.com' // TODO: Uploaded url
+    var formatted_data = "" // Cannot parse empty string
+    var filenames = {}
+    // var policy = '{"expiration":"2018-05-01T12:00:00Z","conditions":[{"bucket":"你的bucket名称"},{"key":"文件保存在BOS中的文件名"}]}'
+    // var base64Policy = base64.encode(policy)
+    // var signature = CryptoJS.HmacSHA256("base64Policy", "百度云的SK").toString(CryptoJS.enc.Hex)
 
-    for(var i = 0; i < this.data.recordFiles.length; i++){
+    for (var i = 0; i < this.data.recordFiles.length; i++) {
       var date = new Date();
-      file_name = date.getFullYear + '-' + date.getMonth() + '-' + date.getDay + '-' + i + '.aac'
-      wx.uploadFile({
-        url: cloudAddress, 
+      var file_name = date.getFullYear() + '-' + date.getMonth() + '-' + date.getDay() + '-' + i + '.aac'
+      filenames[file_name] = this.data.recordFiles[i].tempFilePath
+      /*wx.uploadFile({
+        url: cloudAddress,
         filePath: this.data.recordFiles[i].tempFilePaths,
         name: 'file',
         formData: {
           accessKey: '百度云提供的ak',
           policy: base64Policy,
           signature: signature,
-          key: '文件保存在BOS中的文件名',    // 注意：这个key必须与policy中的key保持一致，否则会报错
+          key: '文件保存在BOS中的文件名',
+               // 注意：这个key必须与policy中的key保持一致，否则会报错
         },
-        success: function (res) {
+        success: function(res) {
           console.log(res)
         },
-        fail: function (res) {
+        fail: function(res) {
           console.log(res)
         }
-
-      })
-      formatted_data += JSON.parse('{"type": "audio", "file_name": ' + file_name + '}')
+      })*/
+      formatted_data += JSON.stringify({"type": "audio", "file_name": file_name}) + ','
     }
 
     if (this.data.answer != "") {
-      formatted_data += JSON.parse('{"type": "text", "content": ' + data.answer + '}')
+      formatted_data += JSON.stringify({"type": "text", "content": data.answer}) +','
     }
 
     for (var i = 0; i < this.data.imageFiles.length; i++) {
       var date = new Date();
-      file_name = date.getFullYear + '-' + date.getMonth() + '-' + date.getDay + '-' + i + data.imageFiles[i].tempFilePaths.split('.').pop()
-      wx.uploadFile({
+      var file_name = date.getFullYear() + '-' + date.getMonth() + '-' + date.getDay() + '-' + i + '.' + this.data.imageFiles[i].split('.').pop()
+      filenames[file_name] = this.data.imageFiles[i]
+      /*wx.uploadFile({
         url: cloudAddress,
         filePath: this.data.imageFiles[i],
         name: 'file',
@@ -197,62 +200,74 @@ Page({
           accessKey: '百度云提供的ak',
           policy: base64Policy,
           signature: signature,
-          key: '文件保存在BOS中的文件名',    // 注意：这个key必须与policy中的key保持一致，否则会报错
+          key: '文件保存在BOS中的文件名',
+               // 注意：这个key必须与policy中的key保持一致，否则会报错
           'Content-Type': 'image'
         },
-        success:function(res){
+        success: function(res) {
           console.log(res)
         },
-        fail:function(res){
+        fail: function(res) {
           console.log(res)
         }
-      })
-      formatted_data += JSON.parse('{"type": "image", "file_name": ' + file_name + '}')
+      })*/
+      formatted_data += JSON.stringify({"type": "image","file_name": file_name})+','
     }
+    formatted_data = formatted_data.slice(0,-1)
 
+    var processed_data = {
+      "course_id": this.data.course_id,
+      "homework_id": this.data.homework_id,
+      "content": formatted_data,
+    }
+    
+    var submitted_data = Object.assign({},processed_data,filenames)
+    console.log(submitted_data)
     /*
-    * Request to upload all hw info to backend
-    */
-    wx.request({
-      data:{ 
-        course_id: this.data.course_id, //TODO Bind with global data or somehow
-        homework_id: this.data.homework_id, //TODO Bind with global data or somehow
-        content: formatted_data
-      },
-      url: address + '/course/homework/submission/submit',
-      method: "POST",
-      header: {
-        'content-type': 'application/x-www-form-urlencoded',
-        'x-access-token': tkn,
-      },
-      success: function (res) {
-        wx.showToast({
-          title: '上传成功',
-          icon: 'success',
-          duration: 1500
-        });
-        console.log('---Submit Successfully---');
-        console.log(res);
-      },
-      fail: function (res) {
-        wx.showToast({
-          title: '上传失败',
-          icon: 'none',
-          duration: 1500
-        });
-        console.log('---Fail---');
-        console.log(res);
-      },
-      complete: function (res) {
-        console.log('---Complete---');
-      }
-    });
+     * Request to upload all hw info to backend
+     */
+    // wx.request({
+    //   data: submitted_data, 
+    //   // {
+    //   //   course_id: this.data.course_id, //TODO Bind with global data or somehow
+    //   //   homework_id: this.data.homework_id, //TODO Bind with global data or somehow
+    //   //   content: formatted_data,
+    //   //   filename[i]: this.data.imageFiles[i]
+    //   // },
+    //   url: address + '/course/homework/submission/submit',
+    //   method: "POST",
+    //   header: {
+    //     'content-type': 'multipart/form-data',
+    //     'x-access-token': tkn,
+    //   },
+    //   success: function(res) {
+    //     wx.showToast({
+    //       title: '上传成功',
+    //       icon: 'success',
+    //       duration: 1500
+    //     });
+    //     console.log('---Submit Successfully---');
+    //     console.log(res);
+    //   },
+    //   fail: function(res) {
+    //     wx.showToast({
+    //       title: '上传失败',
+    //       icon: 'none',
+    //       duration: 1500
+    //     });
+    //     console.log('---Fail---');
+    //     console.log(res);
+    //   },
+    //   complete: function(res) {
+    //     console.log('---Complete---');
+    //   }
+    // });
   },
 
   /**
    * Lifecycle function--Called when page load
    */
-  onLoad: function (options) {
+  onLoad: function(options) {
     /*this.setData({
       course_id: options.course_id,
       homework_id: options.homework_id 
@@ -298,11 +313,11 @@ Page({
       console.log('recorder pause')
     });
 
-    this.recorderManager.onStop(function (res) {
+    this.recorderManager.onStop(function(res) {
       console.log('recorder stop', res)
       that.setData({
         recordFiles: that.data.recordFiles.concat(res)
-        })
+      })
       wx.showToast({
         title: 'Record Finished',
         icon: 'success'
@@ -310,7 +325,9 @@ Page({
     });
 
     this.recorderManager.onFrameRecorded((res) => {
-      const { frameBuffer } = res
+      const {
+        frameBuffer
+      } = res
       console.log('frameBuffer.byteLength', frameBuffer.byteLength)
     });
   },
@@ -318,51 +335,49 @@ Page({
   /**
    * Lifecycle function--Called when page is initially rendered
    */
-  onReady: function () {
+  onReady: function() {
 
   },
 
   /**
    * Lifecycle function--Called when page show
    */
-  onShow: function () {
-    
+  onShow: function() {
+
   },
 
   /**
    * Lifecycle function--Called when page hide
    */
-  onHide: function () {
+  onHide: function() {
 
   },
 
   /**
    * Lifecycle function--Called when page unload
    */
-  onUnload: function () {
+  onUnload: function() {
 
   },
 
   /**
    * page event handler function--Called when user drop down
    */
-  onpulldownRefresh: function () {
+  onpulldownRefresh: function() {
 
   },
 
   /**
    * Called when page reach bottom
    */
-  onReachBottom: function () {
+  onReachBottom: function() {
 
   },
 
   /**
    * Called when user click on the top right corner to share
    */
-  onShareAppMessage: function () {
+  onShareAppMessage: function() {
 
   }
 })
-
-
