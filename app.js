@@ -38,5 +38,6 @@ App({
     address: '',
     currentCourse: null,
     announcement: null,
+    currentHomework: null,
   }
 })

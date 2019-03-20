@@ -1,7 +1,7 @@
 {
   "pages": [
-    "pages/HwSubm/HwSubm",
     "pages/UserCenter/UserCenter",
+    "pages/CrsList/CrsList",
     "pages/Course/Course",
     "pages/Module/Module",
     "pages/HwList/HwList",
@@ -9,8 +9,11 @@
     "pages/Announcement/Announcement",
     "pages/ModuleInfo/ModuleInfo",
     "pages/Homework/Homework",
+    "pages/HwSubm/HwSubm",
     "pages/Grade/Grade",
-    "pages/AnnContent/AnnContent"
+    "pages/AnnContent/AnnContent",
+    "pages/ChangePassword/ChangePassword",
+    "pages/ForgotPassword/ForgotPassword"
     
   ],
   "window": {

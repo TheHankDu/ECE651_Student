@@ -1,4 +1,4 @@
-/* pages/Homework提交/Homework提交.wxss */
+/* pages/作业提交/作业提交.wxss */
 .search{
   display: flex;
   flex-direction: row;
@@ -14,7 +14,7 @@
   flex-direction: row;
   font-size: 12px;
   color: #999999;
-}
+} 
 .doc-title{
   font-weight: bolder;
   font-size: x-large;

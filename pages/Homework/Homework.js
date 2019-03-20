@@ -1,4 +1,4 @@
-// pages/Homework提交/Homework提交.js
+// pages/作业提交/作业提交.js
 Page({
 
   /**
@@ -15,20 +15,11 @@ Page({
 
   Home: function () {
     wx.navigateTo({
-      url: '../../pages/Course/Course',
+      url: '../../pages/课程/课程',
       success: function () {
         console.log("called switchetab");
       }
     }); 
-  },
-
-  Submit: function() {
-    wx.navigateTo({
-      url: '../../pages/HwSubm/HwSubm',
-      success: function () {
-        console.log("From Homework to HwSubm")
-      }
-    })
   },
  
   Upload: function () {
@@ -55,14 +46,14 @@ Page({
       'flexImageSize.height': height + 'rpx'
     });
   },
-  
+
   /**
    * Lifecycle function--Called when page load
    */
   
   onLoad: function (options) {
     wx.setNavigationBarTitle({
-      title: 'Homework Info',
+      title: '作业',
     })
   },
 

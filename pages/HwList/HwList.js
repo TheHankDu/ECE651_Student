@@ -1,49 +1,20 @@
-// pages/HwList/HwList.js
+// pages/作业列表/作业列表.js
 Page({
 
   /**
    * 页面的初始数据
-   * Hw + status
    */
-
   data: {
-    course_id:'',
-    AssignmentArray: [
-      {
-        str: 'A1',
-        homework_id: '',
-        status: 1,
-        styleClass: 'list_title'
-      },
-      {
-        str: 'A2',
-        homework_id: '',
-        status: 2,
-        styleClass: 'list_title'
-      },
-      {
-        str: 'A3',
-        homework_id: '',
-        status: 3,
-        styleClass: 'list_title'
-      }
-    ],
-
-      Status :[{
-      SUBMITTED: 1,
-      NOTSUBMITTED: 2,
-      OVERDUE: 3,
-        properties: {
-          1: { name: "submitted", value: 1, code: "S" },
-          2: { name: "notsubmitted", value: 2, code: "N" },
-          3: { name: "overdue", value: 3, code: "o" }
-        }
-    }]
+    AssignmentArray: [], 
+    title: "",
+    content: "",
   },
 
-  Assignment: function () {
+  Assignment(event) {
+    console.log(event.currentTarget)
+    getApp().globalData.currentHomework = event.currentTarget.dataset.hwlist
     wx.navigateTo({
-      url: '../../pages/Homework/Homework',
+      url: '../../pages/HwSubm/HwSubm',
       success: function () {
         console.log("called switchetab");
       }
@@ -52,7 +23,7 @@ Page({
 
   Home: function () {
     wx.navigateTo({
-      url: '../../pages/Course/Course',
+      url: '../../pages/课程/课程',
       success: function () {
         console.log("called switchetab");
       }
@@ -63,62 +34,39 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    wx.setNavigationBarTitle({
-      title: 'HwList',
-    })
     var that = this
     const address = getApp().globalData.address
-    const tkn = getApp().globalData.token
-
-    //Get Homework
     wx.request({
       url: address + '/course/homework/get_all',
-      method: "GET",
-      //parameter: ""
+      data: {
+        course_id: getApp().globalData.currentCourse,
+      },
       header: {
-        'content-type': 'application/x-www-form-urlencoded',
-        'x-access-token': tkn,
+        //'content-type': 'application/x-www-form-urlencoded',
+        'cookie': getApp().globalData.cookie
       },
+      method: "GET",
       success: function (res) {
-        //probably use for loop to set all item in array?
-        that.setData({
-          'classArray[0].str': res.data.data[0].prefix + res.data.data[0].number + '/section: ' + res.data.data[0].section
-        });
-        console.log('---Successful---');
-        console.log(res);
-      },
-      fail: function (res) {
-        console.log('---Fail---');
-        console.log(res);
-      },
-      complete: function (res) {
-        console.log('---Complete---');
-      }
-    })
+        console.log(res)
 
-    //Get Status
-    /*wx.request({
-      url: address + '/course/homework/submission/get_self',
-      method: "GET",
-      header: {
-        'content-type': 'application/x-www-form-urlencoded',
-        'x-access-token': tkn,
-      },
-      success: function (res) {
+        var ALT = [];
+        var getHomeworkLength = res.data.homeworks.length;
+        for (var i = 0; i < getHomeworkLength; i++) {
+          if (res.data.homeworks[i].deadline.length > 10) {
+            res.data.homeworks[i].deadline = res.data.homeworks[i].deadline.substring(0, 10);
+          }
+        }
+        ALT.push(res.data.homeworks)
         that.setData({
-          'classArray[0].str': res.data.data[0].prefix + res.data.data[0].number + '/section: ' + res.data.data[0].section
-        });
-        console.log('---Successful---');
-        console.log(res);
-      },
-      fail: function (res) {
-        console.log('---Fail---');
-        console.log(res);
-      },
-      complete: function (res) {
-        console.log('---Complete---');
-      }
-    })*/
+          AssignmentArray: ALT[0]
+        })
+        console.log(that.data.AssignmentArray)
+
+      }, 
+    })
+    wx.setNavigationBarTitle({
+      title: '作业列表',
+    })
   },
 
   /**

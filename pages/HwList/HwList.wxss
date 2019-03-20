@@ -1,4 +1,4 @@
-/* pages/HwList/HwList.wxss */
+/* pages/作业列表/作业列表.wxss */
 .doc-title{
   font-weight: bold;
   position: relative;
@@ -7,10 +7,10 @@
   margin-left: 0%;
   line-height: 25px;
   color: #414141;
+  text-align: center
 }
 .list_title{
-  display : flex;
-  flex-direction: row;
+  text-align: center;
   justify-content: center;
 }
 .hr{

@@ -1,4 +1,4 @@
-<!--pages/UserCenter/UserCenter.wxml-->
+<!--pages/用户中心/用户中心.wxml-->
 <view class="page">
   <view class="page_hd">
     <view class="section_ctn">
@@ -15,12 +15,12 @@
     </view>
     <view class="section">
       <view class="btn-area">
-        <button type="primary" bindtap="login">Login/登陆</button>
+        <button type="primary" bindtap="login">Login</button>
       </view>
     </view>
     <view class="section">
       <view class="btn-area">
-        <button type="default" bindtap="forgetpassword">Forget Password/忘记密码</button>
+        <button type="default" bindtap="forgetpassword">Forgot Password</button>
       </view>
     </view>
   </view>

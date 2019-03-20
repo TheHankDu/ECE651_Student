@@ -6,6 +6,7 @@ Page({
    * page initial data
    */
   data: {
+    homework_info: null,
     course_id: '',
     homework_id: '',
     cloudLink: '',
@@ -185,7 +186,7 @@ Page({
     }
 
     if (this.data.answer != "") {
-      formatted_data += JSON.stringify({"type": "text", "content": data.answer}) +','
+      formatted_data += JSON.stringify({"type": "text", "content": this.data.answer}) +','
     }
 
     for (var i = 0; i < this.data.imageFiles.length; i++) {
@@ -213,12 +214,16 @@ Page({
       })*/
       formatted_data += JSON.stringify({"type": "image","file_name": file_name})+','
     }
-    formatted_data = formatted_data.slice(0,-1)
+    
+    if(formatted_data != ""){
+      formatted_data = formatted_data.slice(0, -1)
+      formatted_data = '[' + formatted_data + ']'
+    }
 
     var processed_data = {
-      "course_id": this.data.course_id,
-      "homework_id": this.data.homework_id,
-      "content": formatted_data,
+      course_id: getApp().globalData.currentCourse,
+      homework_id: getApp().globalData.currentHomework.id,
+      content: formatted_data,
     }
     
     var submitted_data = Object.assign({},processed_data,filenames)
@@ -226,56 +231,65 @@ Page({
     /*
      * Request to upload all hw info to backend
      */
-    // wx.request({
-    //   data: submitted_data, 
-    //   // {
-    //   //   course_id: this.data.course_id, //TODO Bind with global data or somehow
-    //   //   homework_id: this.data.homework_id, //TODO Bind with global data or somehow
-    //   //   content: formatted_data,
-    //   //   filename[i]: this.data.imageFiles[i]
-    //   // },
-    //   url: address + '/course/homework/submission/submit',
-    //   method: "POST",
-    //   header: {
-    //     'content-type': 'multipart/form-data',
-    //     'x-access-token': tkn,
-    //   },
-    //   success: function(res) {
-    //     wx.showToast({
-    //       title: '上传成功',
-    //       icon: 'success',
-    //       duration: 1500
-    //     });
-    //     console.log('---Submit Successfully---');
-    //     console.log(res);
-    //   },
-    //   fail: function(res) {
-    //     wx.showToast({
-    //       title: '上传失败',
-    //       icon: 'none',
-    //       duration: 1500
-    //     });
-    //     console.log('---Fail---');
-    //     console.log(res);
-    //   },
-    //   complete: function(res) {
-    //     console.log('---Complete---');
-    //   }
-    // });
+    wx.request({
+      data: {
+        course_id: this.data.homework_info.course_id,
+        homework_id: this.data.homework_info.id,
+        content: submitted_data
+        },
+      url: address + '/course/homework/submission/submit',
+      method: "POST",
+      header: {
+        'content-type': 'multipart/form-data',
+        'cookie': getApp().globalData.cookie
+      },
+      success: function(res) {
+        if(res.statusCode == 200){
+          wx.showToast({
+            title: '上传成功',
+            icon: 'success',
+            duration: 1500
+          });
+          console.log('---Submit Successfully---');
+          console.log(res);
+        }
+        else{
+          wx.showToast({
+            title: '上传失败',
+            icon: 'none',
+            duration: 1500
+          });
+          console.log('---Fail---');
+        }
+
+      },
+      fail: function(res) {
+        wx.showToast({
+          title: '上传失败',
+          icon: 'none',
+          duration: 1500
+        });
+        console.log('---Fail---');
+        console.log(res);
+      },
+      complete: function(res) {
+        console.log('---Complete---');
+      }
+    });
   },
 
   /**
    * Lifecycle function--Called when page load
    */
   onLoad: function(options) {
-    /*this.setData({
-      course_id: options.course_id,
-      homework_id: options.homework_id 
-    })*/
+    this.setData({
+      homework_info: getApp().globalData.currentHomework,
+    })
     wx.setNavigationBarTitle({
       title: '作业提交',
     })
     console.log('Load 作业提交')
+    
 
     var that = this;
 

@@ -1,53 +1,45 @@
-// pages/Course列表/Course列表.js
+// pages/课程列表/课程列表.js
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
-    classArray: [
-      { 
-        str: '',
-        styleClass: 'list_title'
-      },
-      {
-        str: '',
-        styleClass: 'list_title'
-      },
-      {
-        str: '',
-        styleClass: 'list_title'
-      }
-    ]
+    classArray: []
   },
 
-  course: function () {
+  course(event) {
+    console.log(event.currentTarget.dataset.course.course_id);
+    getApp().globalData.currentCourse = event.currentTarget.dataset.course.course_id;
     wx.switchTab({
-      url: '../../pages/Attendance/Attendance',
+      url: '../../pages/Module/Module',
       success: function () {
-        console.log("called switchetab");
+        console.log('成功');
       }
     });
   },
-
-  /**
+ 
+  /** 
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
     var that = this
     const address = getApp().globalData.address
-    const tkn = getApp().globalData.token
     wx.request({
-      url: address + '/users' + '/getCourse',
+      url: address + '/course/search',
       method: "GET",
       header: {
-        'content-type': 'application/x-www-form-urlencoded',
-        'x-access-token': tkn,
+        //'content-type': 'application/x-www-form-urlencoded',
+        'cookie': getApp().globalData.cookie
       },
       success: function (res) {
+        var cl = that.data.classArray;
+        cl.push(res.data.courses);
         that.setData({
-          'classArray[0].str': res.data.data[0].prefix + res.data.data[0].number + '/section: ' + res.data.data[0].section
+          classArray: cl[0]
         });
+        // console.log(cl);
+        // console.log(that.data.classArray);
         console.log('---Successful---');
         console.log(res);
       },
@@ -59,6 +51,12 @@ Page({
         console.log('---Complete---');
       }
     })
+
+    wx.setNavigationBarTitle({
+      title: '课程'
+    })
+
+
   },
 
   /**

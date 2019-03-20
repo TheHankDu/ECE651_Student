@@ -1,7 +1,7 @@
 <!--pages/HwSubm.wxml-->
 
 <view class='page_hd'>
-  <view class="page_title">Assignment 1</view>
+  <view class="page_title">{{homework_info.title}}</view>
 </view>
 
 <view class="page__bd">
@@ -9,12 +9,12 @@
     <view class="weui-cell">
       <view class="weui-article">
         <view class="weui-article__p">
-          <text>Assignment Description
-
-          <!--{{TODO: Bind with online Description}}-->
-          </text>      
+          <text>{{homework_info.content}}</text>     
         </view>
       </view>
+    </view>
+    <view class="weui-cell">
+      <text>Due: {{homework_info.deadline}}</text> 
     </view>
     <view class="weui-cell">
       <input bindinput='bindKeyInput' placeholder='Enter Answer Here'></input>
