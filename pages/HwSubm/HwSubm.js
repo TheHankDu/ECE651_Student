@@ -144,10 +144,6 @@ Page({
     });
   },
 
-  del: function(object) {
-    //TODO: delete exist doc
-  },
-
   /*
    * Submit Function
    */
@@ -228,54 +224,74 @@ Page({
     
     var submitted_data = Object.assign({},processed_data,filenames)
     console.log(submitted_data)
-    /*
-     * Request to upload all hw info to backend
-     */
-    wx.request({
-      data: {
+
+    wx.uploadFile({
+      url: address + '/course/homework/submission/submit',
+      filePath: this.data.imageFiles[0],
+      name: 'a.jpg',
+      formData: {
         course_id: this.data.homework_info.course_id,
         homework_id: this.data.homework_info.id,
         content: submitted_data
-        },
-      url: address + '/course/homework/submission/submit',
-      method: "POST",
-      header: {
-        'content-type': 'multipart/form-data',
+      },
+      header:{
         'cookie': getApp().globalData.cookie
       },
-      success: function(res) {
-        if(res.statusCode == 200){
-          wx.showToast({
-            title: '上传成功',
-            icon: 'success',
-            duration: 1500
-          });
-          console.log('---Submit Successfully---');
-          console.log(res);
-        }
-        else{
-          wx.showToast({
-            title: '上传失败',
-            icon: 'none',
-            duration: 1500
-          });
-          console.log('---Fail---');
-        }
-
+      success: function (res) {
+        console.log(res)
       },
-      fail: function(res) {
-        wx.showToast({
-          title: '上传失败',
-          icon: 'none',
-          duration: 1500
-        });
-        console.log('---Fail---');
-        console.log(res);
-      },
-      complete: function(res) {
-        console.log('---Complete---');
+      fail: function (res) {
+        console.log(res)
       }
-    });
+    })
+    /*
+     * Request to upload all hw info to backend
+     */
+    // wx.request({
+    //   data: {
+    //     course_id: this.data.homework_info.course_id,
+    //     homework_id: this.data.homework_info.id,
+    //     content: submitted_data
+    //     },
+    //   url: address + '/course/homework/submission/submit',
+    //   method: "POST",
+    //   header: {
+    //     'content-type': 'multipart/form-data',
+    //     'cookie': getApp().globalData.cookie
+    //   },
+    //   success: function(res) {
+    //     if(res.statusCode == 200){
+    //       wx.showToast({
+    //         title: '上传成功',
+    //         icon: 'success',
+    //         duration: 1500
+    //       });
+    //       console.log('---Submit Successfully---');
+    //       console.log(res);
+    //     }
+    //     else{
+    //       wx.showToast({
+    //         title: '上传失败',
+    //         icon: 'none',
+    //         duration: 1500
+    //       });
+    //       console.log('---Fail---');
+    //     }
+
+    //   },
+    //   fail: function(res) {
+    //     wx.showToast({
+    //       title: '上传失败',
+    //       icon: 'none',
+    //       duration: 1500
+    //     });
+    //     console.log('---Fail---');
+    //     console.log(res);
+    //   },
+    //   complete: function(res) {
+    //     console.log('---Complete---');
+    //   }
+    // });
   },
 
   /**
