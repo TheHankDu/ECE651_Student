@@ -33,14 +33,13 @@ Page({
         'cookie': getApp().globalData.cookie
       },
       success: function (res) {
-        var cl = that.data.classArray;
-        cl.push(res.data.courses);
+        var cl = []
+        //cl.push(res.data.courses);
+        cl = res.data.courses;
         that.setData({
-          classArray: cl[0]
+          classArray: cl
         });
-        // console.log(cl);
-        // console.log(that.data.classArray);
-        console.log('---Successful---');
+        console.log('---课程列表加载成功---');
         console.log(res);
       },
       fail: function (res) {
@@ -48,7 +47,7 @@ Page({
         console.log(res);
       },
       complete: function (res) {
-        console.log('---Complete---');
+        console.log('---课程列表Complete---');
       }
     })
 

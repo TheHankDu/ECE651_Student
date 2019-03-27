@@ -51,9 +51,10 @@ Page({
             res.data.homeworks[i].deadline = res.data.homeworks[i].deadline.substring(0, 10);
           }
         }
-        ALT.push(res.data.homeworks)
+        //ALT.push(res.data.homeworks)
+        ALT = res.data.homeworks
         that.setData({
-          AssignmentArray: ALT[0]
+          AssignmentArray: ALT
         })
         console.log(that.data.AssignmentArray)
 

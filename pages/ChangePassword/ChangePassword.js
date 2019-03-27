@@ -46,7 +46,7 @@ Page({
         },
         success: function(res){
           console.log(res)
-          if(res.data.is_verified == 1 && res.data.sucess == 1){
+          if(res.data.is_verified == 1 && res.data.success == 1){
             wx.showModal({
               title: 'Success!',
               content: 'Password Changed',
