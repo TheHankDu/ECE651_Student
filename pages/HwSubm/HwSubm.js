@@ -223,22 +223,75 @@ Page({
     }
     
     var submitted_data = Object.assign({},processed_data,filenames)
-    console.log(submitted_data)
+    //console.log(submitted_data)
 
     wx.uploadFile({
       url: address + '/course/homework/submission/submit',
       filePath: this.data.imageFiles[0],
-      name: 'a.jpg',
-      formData: {
-        course_id: this.data.homework_info.course_id,
-        homework_id: this.data.homework_info.id,
-        content: submitted_data
-      },
+      name: Object.keys(filenames)[0],
+      formData: processed_data,
       header:{
         'cookie': getApp().globalData.cookie
       },
       success: function (res) {
-        console.log(res)
+        console.log(res);
+        //Possible to combine all this into util
+        if (res.statusCode == 200) {
+          wx.showToast({
+            title: '上传成功',
+            icon: 'success',
+            duration: 1500
+          });
+        }
+        else if (res.statusCode == 400) {
+          wx.showToast({
+            title: '上传失败：Report Admin',
+            icon: 'none', // May use image of Big X to indicatate fail in the future
+            duration: 1500
+          });
+        }
+        else if (res.statusCode == 403) {
+          wx.showToast({
+            title: '上传失败：No Authorization',
+            icon: 'none', // May use image of Big X to indicatate fail in the future
+            duration: 1500
+          });
+        }
+        else if (res.statusCode == 404) {
+          wx.showToast({
+            title: '上传失败：URL Not Found',
+            icon: 'none', // May use image of Big X to indicatate fail in the future
+            duration: 1500
+          });
+        }
+        else if (res.statusCode == 405) {
+          wx.showToast({
+            title: '上传失败：Illegal Request',
+            icon: 'none', // May use image of Big X to indicatate fail in the future
+            duration: 1500
+          });
+        }
+        else if(res.statusCode == 409) {
+          wx.showToast({
+            title: '上传失败：请勿重复提交',
+            icon: 'none', // May use image of Big X to indicatate fail in the future
+            duration: 1500
+          });
+        }
+        else if (res.statusCode == 500) {
+          wx.showToast({
+            title: '上传失败：内部错误',
+            icon: 'none', // May use image of Big X to indicatate fail in the future
+            duration: 1500
+          });
+        }
+        else{
+          wx.showToast({
+            title: '上传失败',
+            icon: 'none',// May use image of Big X to indicatate fail in the future
+            duration: 1500
+          });
+        }
       },
       fail: function (res) {
         console.log(res)
