@@ -10,7 +10,7 @@ Page({
 
   Announcement(event) {
     console.log(event.currentTarget.dataset);
-    getApp().globalData.announcement = event.currentTarget.dataset.announce.content
+    getApp().globalData = event.currentTarget.dataset.announce
     wx.navigateTo({
       url: '../AnnContent/AnnContent',
       success: function () {
@@ -40,38 +40,28 @@ Page({
     })
     var that = this
     const address = getApp().globalData.address
-    const tkn = getApp().globalData.token
-    var courseid = getApp().globalData.currentCourse
-    console.log(courseid)
     wx.request({
-      url: address + '/courses' + '/getAnnouncement',
+      url: address + '/course/announcement/get_all',
       data: {
-        course: courseid
+        course_id: getApp().globalData.currentCourse
       },
-      method: "POST",
+      method: "Get",
       header: {
         'content-type': 'application/x-www-form-urlencoded',
         'cookie': getApp().globalData.cookie
       },
       success: function (res) {
-        if(res.statusCode == 404)
+        if (res.statusCode == 200)
         {
-          //Empty Announcement
-          //Do Nothing
-          console.log("No Anouncement")
-        }
-        else if (res.statusCode == 200)
-        {
-          that.data.AnnouncementArray = [];
-          var al = that.data.AnnouncementArray;
-          al = res.data.data;
           that.setData({
-            AnnouncementArray: al
+            AnnouncementArray: res.data.announcements
           })
-          console.log(al);
-          console.log(that.data.AnnouncementArray);
-          console.log('---Get Anouncement List Successful---');
+          console.log('---Get Anouncement List Successfully---');
 
+        }
+        else
+        {
+          console.log(res.errmsg)
         }
       },
       fail: function (res) {
@@ -97,46 +87,43 @@ Page({
     // wx.setNavigationBarTitle({
     //   title: 'Announcement',
     // })
-    var that = this
-    const address = getApp().globalData.address
-    const tkn = getApp().globalData.token
-    var courseid = getApp().globalData.currentCourse
-    console.log(courseid)
-    wx.request({
-      url: address + '/courses' + '/getAnnouncement',
-      data: {
-        course: courseid
-      },
-      method: "POST",
-      header: {
-        'content-type': 'application/x-www-form-urlencoded',
-        'cookie': getApp().globalData.cookie
-      },
-      success: function (res) {
-        if (res.statusCode == 404) {
-          //Empty Announcement
-          //Do Nothing
-          console.log("No Anouncement")
-        }
-        else if (res.statusCode == 200) {
-          that.data.AnnouncementArray = [];
-          var al = that.data.AnnouncementArray;
-          al = res.data.data;
-          that.setData({
-            AnnouncementArray: al
-          })
-          console.log(al);
-          console.log(that.data.AnnouncementArray);
-          console.log('---Get Anouncement List Successful---');
-        }
-      },
-      fail: function (res) {
+    // var that = this
+    // const address = getApp().globalData.address
+    // var courseid = getApp().globalData.currentCourse
+    // console.log(courseid)
+    // wx.request({
+    //   url: address + '/courses' + '/getAnnouncement',
+    //   data: {
+    //     course: courseid
+    //   },
+    //   method: "POST",
+    //   header: {
+    //     'content-type': 'application/x-www-form-urlencoded',
+    //     'cookie': getApp().globalData.cookie
+    //   },
+    //   success: function (res) {
+    //     if (res.statusCode == 404) {
+    //       //Empty Announcement
+    //       //Do Nothing
+    //       console.log("No Anouncement")
+    //     }
+    //     else if (res.statusCode == 200) {
+    //       that.data.AnnouncementArray = [];
+    //       var al = that.data.AnnouncementArray;
+    //       al = res.data.data;
+    //       that.setData({
+    //         AnnouncementArray: al
+    //       })
+    //       console.log('---Get Anouncement List Successfully---');
+    //     }
+    //   },
+    //   fail: function (res) {
 
-      },
-      complete: function (res) {
+    //   },
+    //   complete: function (res) {
 
-      }
-    })
+    //   }
+    // })
 
   },
 

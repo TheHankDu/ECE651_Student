@@ -19,7 +19,7 @@ Page({
 
   Module: function () {
     wx.navigateTo({
-      url: '../../pages/ModuleInfo/ModuleInfo',
+      url: '../ModuleInfo/ModuleInfo',
       success: function () {
         console.log("called switchetab");
       }
@@ -28,7 +28,7 @@ Page({
 
   Home: function () {
     wx.navigateTo({
-      url: '../../pages/CrsList/CrsList',
+      url: '../CrsList/CrsList',
       success: function () {
         console.log("called switchetab");
       }
