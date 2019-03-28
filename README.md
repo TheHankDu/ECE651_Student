@@ -8,7 +8,16 @@ Nowadays, along with the increasing of working pace, the mini-program will only 
 
 ## Getting Started
 
+### Jovial Concepts
+
+### Features
+
 ### User Guide
+1. Installation
+2. Demo
+3. Usage
+4. Notes
+5. Known Issues
 
 ## Contact
 [Hank Du](mailto:hank.du@uwaterloo.ca)
