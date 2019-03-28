@@ -110,7 +110,7 @@ Page({
       method: "POST",
       header: {
         'content-type': 'application/x-www-form-urlencoded',
-        'x-access-token': tkn
+        'cookie': getApp().globalData.cookie
       },
       success: function (res) {
         if (res.statusCode == 404) {
