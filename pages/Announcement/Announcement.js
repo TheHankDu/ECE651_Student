@@ -10,7 +10,6 @@ Page({
 
   Announcement(event) {
     console.log(event.currentTarget.dataset);
-    getApp().globalData = event.currentTarget.dataset.announce
     wx.navigateTo({
       url: '../AnnContent/AnnContent',
       success: function () {
