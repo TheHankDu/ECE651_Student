@@ -12,7 +12,7 @@ Page({
     console.log(event.currentTarget.dataset);
     getApp().globalData.announcement = event.currentTarget.dataset.announce.content
     wx.navigateTo({
-      url: '../../pages/AnnContent/AnnContent',
+      url: '../AnnContent/AnnContent',
       success: function () {
         console.log(event.currentTarget.dataset.announce.content);
       }
@@ -36,7 +36,7 @@ Page({
   onLoad: function (options) {
    
     wx.setNavigationBarTitle({
-      title: 'Announcement',
+      title: '声明',
     })
     var that = this
     const address = getApp().globalData.address
@@ -51,20 +51,28 @@ Page({
       method: "POST",
       header: {
         'content-type': 'application/x-www-form-urlencoded',
-        'x-access-token': tkn
+        'cookie': getApp().globalData.cookie
       },
       success: function (res) {
-        that.data.AnnouncementArray = [];
-        var al = that.data.AnnouncementArray;
-        al.push(res.data.data);
-        console.log(res);
-        that.setData({
-          AnnouncementArray: al[0]
-        })
-        console.log(al);
-        console.log(that.data.AnnouncementArray);
-        console.log('---Successful---');
-        console.log(res);
+        if(res.statusCode == 404)
+        {
+          //Empty Announcement
+          //Do Nothing
+          console.log("No Anouncement")
+        }
+        else if (res.statusCode == 200)
+        {
+          that.data.AnnouncementArray = [];
+          var al = that.data.AnnouncementArray;
+          al = res.data.data;
+          that.setData({
+            AnnouncementArray: al
+          })
+          console.log(al);
+          console.log(that.data.AnnouncementArray);
+          console.log('---Get Anouncement List Successful---');
+
+        }
       },
       fail: function (res) {
 
@@ -105,18 +113,22 @@ Page({
         'x-access-token': tkn
       },
       success: function (res) {
-        that.setData({AnnouncementArray: res.data.data});
-        // that.data.AnnouncementArray = [];
-        // var al = that.data.AnnouncementArray;
-        // al.push(res.data.data);
-        // console.log(res);
-        // that.setData({
-        //   AnnouncementArray: al[0]
-        // })
-        // console.log(al);
-        // console.log(that.data.AnnouncementArray);
-        // console.log('---Successful---');
-        // console.log(res);
+        if (res.statusCode == 404) {
+          //Empty Announcement
+          //Do Nothing
+          console.log("No Anouncement")
+        }
+        else if (res.statusCode == 200) {
+          that.data.AnnouncementArray = [];
+          var al = that.data.AnnouncementArray;
+          al = res.data.data;
+          that.setData({
+            AnnouncementArray: al
+          })
+          console.log(al);
+          console.log(that.data.AnnouncementArray);
+          console.log('---Get Anouncement List Successful---');
+        }
       },
       fail: function (res) {
 
