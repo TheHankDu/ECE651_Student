@@ -1,0 +1,59 @@
+{
+	"pages":[
+		"pages/attendance/attendance",
+		"pages/information/information",
+		"pages/content/content",
+		"pages/submissions/submissions",
+		"pages/coursenote/coursenote",
+		"pages/coursenote-upload/coursenote-upload",
+		"pages/coursenote-edit/coursenote-edit",		
+		"pages/coursenote-details/coursenote-details",
+		"pages/announcement/announcement"
+	],
+	"window": {
+		"backgroundTextStyle": "light",
+		"navigationBarBackgroundColor": "#9E9E9E",
+		"navigationBarTitleText": "Jovial",
+		"navigationBarTextStyle": "black",
+		"navigationBarTextSize": "larger",
+		"backgroundColor": "#CDE000",
+		"onReachBottomDistance": 10,
+		"enablePullDownRefresh": true
+	},
+	"tabBar": {
+		"backgroundColor": "#F7F7FA",
+		"selectedColor": "#1aad19",
+		"list": [
+			{
+				"pagePath": "pages/attendance/attendance",
+				"text": "attendence",
+				"iconPath": "pages/images/tabbar/attendence-origin.png",
+				"selectedIconPath": "pages/images/tabbar/attendence-after.png"
+			},
+			{
+				"pagePath": "pages/information/information",
+				"text": "homework",
+				"iconPath": "pages/images/tabbar/homework-origin.png",
+				"selectedIconPath": "pages/images/tabbar/homework-after.png"
+			},
+			{
+				"pagePath": "pages/coursenote/coursenote",
+				"text": "course note",
+				"iconPath": "pages/images/tabbar/coursenote-origin.png",
+				"selectedIconPath": "pages/images/tabbar/coursenote-after.png"
+			},
+			{
+				"pagePath": "pages/announcement/announcement",
+				"text": "announcement",
+				"iconPath": "pages/images/tabbar/curriculum-origin.png",
+				"selectedIconPath": "pages/images/tabbar/curriculum-after.png"
+			},
+			{
+				"pagePath": "pages/announcement/announcement",
+				"text": "edit",
+				"iconPath": "pages/images/tabbar/edit-origin.png",
+				"selectedIconPath": "pages/images/tabbar/edit-after.png"
+			}
+		]
+	}
+}

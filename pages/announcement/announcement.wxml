@@ -1,0 +1,14 @@
+<!--pages/声明/声明.wxml-->
+<view class="weui-cells">
+<view class="weui-cell__bd"></view>
+  <textarea placeholder="Announcement:" rows="4" bindinput='UserInput'></textarea>
+</view>
+<view class="weui-cells:after"></view>
+
+<view>
+  <button formType='submit' class="weui-btn weui-btn_primary" bindtap='Upload'>Upload</button> 
+</view>
+
+<view>
+  <button class="weui-btn weui-btn_default" ontap="Home">{{Home}}</button> 
+</view>

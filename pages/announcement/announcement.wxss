@@ -1,0 +1,26 @@
+/* pages/声明/声明.wxss */
+.doc-content{
+  position: relative;
+  margin: 10px 15px;
+  margin-bottom: 150px;
+  line-height: 25px;
+  color: #414141;
+  font-weight: bold; 
+}
+.hr{
+  height: 3px;
+  width: 375px;
+  background-color: #d4d4d3;
+  margin: 10px;
+  margin-left: 0px;
+}
+.submit{
+  margin-top: 30px;
+  width: 100px;
+  background-color: #daf108;
+  font-weight: bold;
+} 
+.Home{
+  margin-top: 50px;
+  background-color: #f1da08;
+}

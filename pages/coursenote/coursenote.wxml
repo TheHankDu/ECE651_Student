@@ -1,0 +1,18 @@
+<!--pages/coursenote/cousrenote.wxml-->
+<view class="doc-title" wx:for="{{namelist}}">
+  <text class="{{item.styleClass}}">{{item.str}}</text>
+</view>
+<view class="weui-cells">
+  <view class="weui-cell weui-cell_access list" wx:for="{{filelist}}">
+    <text class="{{item.styleClass}}" ontap="File">{{item.str}}</text>
+    <view class="weui-cell__ft list">Edit
+      <view class="weui-cell weui-cell__ft_in-access:after list" ontap="Edit"> </view>
+    </view>
+
+  </view>
+</view>
+<view class="weui-cells:after"></view>
+<view class="weui-btn weui-btn_primary" ontap="Upload">Add Coursenote</view>
+<view>
+  <button class="weui-btn weui-btn_default" ontap="Home">Return To Home</button>
+</view>

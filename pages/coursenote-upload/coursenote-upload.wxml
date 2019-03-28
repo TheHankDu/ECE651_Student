@@ -1,0 +1,33 @@
+<!-- <view class="doc-title">
+  <text>Title</text>
+</view>  -->
+<!-- <view class="doc-content">
+  <text>Description:</text>
+</view>
+<view class="hr"></view> -->
+
+<view class="title">
+  <text> New Coursenote</text>
+  <view>
+    <button formType='submit' class="weui-btn_mini weui-btn_primary mini" bindtap="Upload">Upload</button>
+    <block wx:for="{{tmpImageUrl}}" wx:key="{{index}}">
+      <image src='{{tmpImageUrl[index]}}' mode='aspectFit' bindload='tmpImageLoaded' style='width:{{flexImageSize.width}}; height:{{flexImageSize.height}};'></image>
+    </block>
+  </view>
+</view>
+
+<view class="weui-cells weui-cells_form">
+  <view class="weui-cells weui-cells_form:before"></view>
+  <view class="weui-cell__bd">
+    <textarea class="weui-textarea" placeholder="Description: " rows="4" bindinput='BindTitle'></textarea>
+  </view>
+</view>
+<view class="weui-cells:after"></view>
+
+<view>
+  <button formType='submit' class="weui-btn weui-btn_primary" bindtap="Submit">Submit</button>
+</view>
+
+<view>
+  <button class="weui-btn weui-btn_default" ontap="Home">Return to Home</button>
+</view>

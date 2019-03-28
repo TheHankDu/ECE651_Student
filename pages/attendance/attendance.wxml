@@ -1,0 +1,26 @@
+<!--pages/签到/签到.wxml-->
+<view class="weui-cells">
+
+  <view class="weui-cell list" wx:for="{{SectionArray}}">
+    <text class="{{item.styleClass}}" ontap="Section">{{item.str}}</text>
+    <radio-group class="radio-group" bindchange="radioChange">
+      <label class="radio" wx:for="{{AttendArray}}">
+        <radio value="{{item.name}}" checked="{{item.checked}}" />{{item.value}}
+      </label>
+    </radio-group>
+  </view>
+
+</view>
+
+<view class="weui-cells:after">
+
+</view>
+
+<view>
+  <button class="weui-btn weui-btn_primary" ontap="save_status">Save the Changes </button>
+</view>
+
+
+<view>
+  <button class="weui-btn weui-btn_default" style="background:white" ontap="Home">Return To Home</button>
+</view>

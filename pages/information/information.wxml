@@ -1,0 +1,14 @@
+<!--pages/作业信息/作业信息.wxml-->
+<view class="weui-cell weui-cell_access" wx:for="{{AssignmentArray}}" class="weui-cell weui-cell__ft_in-access:after" ontap="View">
+  <text class="{{item.styleClass}}">{{item.str}}</text>
+</view>
+<view class="weui-cell:after"></view>
+
+<view>
+  <button class="weui-btn weui-btn_primary" ontap="Add">{{Add}}</button>
+</view>
+
+
+<view>
+  <button class="weui-btn weui-btn_default" ontap="Home">Return To Home</button>
+</view>

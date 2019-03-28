@@ -1,0 +1,19 @@
+<!--pages/作业内容/作业内容.wxml-->
+<view class="doc-title">
+  <text>New Assignment</text>
+</view>
+<view class="weui-cells weui-cells_form">
+  <view class="weui-cells weui-cells_form:before"></view>
+  <view class="weui-cell__bd">
+    <textarea class="weui-textarea" placeholder="Description:" rows="4" bindinput='UserInput'></textarea>
+  </view>
+</view>
+<view class="weui-cells weui-cells_form:after"></view>
+
+<view>
+  <button formType='submit' class="weui-btn weui-btn_primary" bindtap='Upload'>Upload</button>
+</view>
+
+<view>
+  <button class="weui-btn weui-btn_default" ontap="Home">{{Home}}</button>
+</view>

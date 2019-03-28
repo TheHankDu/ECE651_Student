@@ -1,0 +1,24 @@
+<!--pages/提交情况/提交情况.wxml-->
+<view class="weui-cells">
+  <view class="weui-cell weui-cell_access list" wx:for="{{SectionArray}}">
+    <text class="{{item.styleClass}}" ontap="Section">{{item.str}}</text>
+    <radio-group class="radio-group" bindchange="radioChange">
+      <label class="radio" wx:for="{{AttendArray}}">
+        <radio value="{{item.name}}" checked="{{item.checked}}" />{{item.value}}
+      </label>
+    </radio-group>
+    <view class="weui-cell__ft list">Edit
+      <view class="weui-cell weui-cell__ft_in-access:after list" ontap="Edit"></view>
+    </view>
+
+  </view>
+</view>
+
+<view class="weui-cells:after"></view>
+
+<view>
+  <button formType='submit' class="weui-btn weui-btn_primary" ontap="save_status">Save</button>
+</view>
+<view>
+  <button class="weui-btn weui-btn_default" ontap="Home">Return To Home</button>
+</view>
