@@ -34,9 +34,10 @@ App({
     })
   },
   globalData: {
-    token: '',
+    cookie: '',
     address: '',
     currentCourse: null,
     announcement: null,
+    currentHomework: null,
   }
 })

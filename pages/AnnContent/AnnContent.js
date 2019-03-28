@@ -1,48 +1,51 @@
-// pages/module/module.js
+// pages/AnnContent/AnnContent.js
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
-    ModuleArray: [
-      {
-        str: 'Class 1: Wireless',
-        styleClass: 'list_title'
-      },
-      {
-        str: 'Class 2: TCP/IP',
-        styleClass: 'list_title'
-      }
-    ]
+    content: "",
   },
-
-  Module: function () {
-    wx.navigateTo({
-      url: '../ModuleInfo/ModuleInfo',
-      success: function () {
-        console.log("called switchetab");
-      }
-    });
-  },
-
-  Home: function () {
-    wx.navigateTo({
-      url: '../CrsList/CrsList',
-      success: function () {
-        console.log("called switchetab");
-      }
-    });
-  },
-
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
     wx.setNavigationBarTitle({
-      title: 'Module'
+      title: 'AnnContent',
     })
+    var that = this
+    const address = getApp().globalData.address
+    const tkn = getApp().globalData.token
+    var courseid = getApp().globalData.currentCourse
+    var headup = getApp().globalData.announcement
+    //console.log(courseid)
+    wx.request({
+      url: address + '/courses' + '/getAnnouncement',
+      data: {
+        course: courseid
+      },
+      method: "POST",
+      header: {
+        'content-type': 'application/x-www-form-urlencoded',
+        'x-access-token': tkn
+      },
+      success: function (res) {
+        console.log(headup);
+        that.setData({
+          content: headup
+        })
+       //console.log(that.data.content)
+      },
+      fail: function (res) {
+
+      },
+      complete: function (res) {
+
+      }
+    })
+    
   },
 
   /**

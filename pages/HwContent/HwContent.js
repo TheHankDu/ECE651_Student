@@ -1,48 +1,27 @@
-// pages/module/module.js
+// pages/Homework内容/Homework内容.js
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
-    ModuleArray: [
-      {
-        str: 'Class 1: Wireless',
-        styleClass: 'list_title'
-      },
-      {
-        str: 'Class 2: TCP/IP',
-        styleClass: 'list_title'
-      }
-    ]
-  },
-
-  Module: function () {
-    wx.navigateTo({
-      url: '../ModuleInfo/ModuleInfo',
-      success: function () {
-        console.log("called switchetab");
-      }
-    });
+    Home: "Return To Home",
   },
 
   Home: function () {
     wx.navigateTo({
-      url: '../CrsList/CrsList',
+      url: '../../pages/CrsList/CrsList',
       success: function () {
         console.log("called switchetab");
       }
     });
   },
-
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    wx.setNavigationBarTitle({
-      title: 'Module'
-    })
+
   },
 
   /**

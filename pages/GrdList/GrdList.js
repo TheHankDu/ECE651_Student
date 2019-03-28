@@ -1,30 +1,32 @@
-// pages/module/module.js
+// pages/GrdList/GrdList.js
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
-    ModuleArray: [
+    GradeArray: [
       {
-        str: 'Class 1: Wireless',
+        str: 'Assignment 1: Grade',
         styleClass: 'list_title'
       },
       {
-        str: 'Class 2: TCP/IP',
+        str: 'Assignment 2: Grade',
         styleClass: 'list_title'
       }
     ]
   },
 
-  Module: function () {
+ 
+  Grade: function () {
     wx.navigateTo({
-      url: '../ModuleInfo/ModuleInfo',
+      url: '../Grade/Grade',
       success: function () {
         console.log("called switchetab");
       }
     });
   },
+  
 
   Home: function () {
     wx.navigateTo({
@@ -35,13 +37,13 @@ Page({
     });
   },
 
-
+ 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
     wx.setNavigationBarTitle({
-      title: 'Module'
+      title: 'GrdList',
     })
   },
 
