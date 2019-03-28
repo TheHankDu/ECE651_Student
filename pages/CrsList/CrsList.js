@@ -12,9 +12,9 @@ Page({
     console.log(event.currentTarget.dataset.course.course_id);
     getApp().globalData.currentCourse = event.currentTarget.dataset.course.course_id;
     wx.switchTab({
-      url: '../../pages/Module/Module',
+      url: '../Module/Module',
       success: function () {
-        console.log('成功');
+        console.log('Switch to Module 成功');
       }
     });
   },
@@ -33,22 +33,21 @@ Page({
         'cookie': getApp().globalData.cookie
       },
       success: function (res) {
+        console.log(res)
         var cl = that.data.classArray;
-        cl.push(res.data.courses);
+        cl = res.data.courses;
         that.setData({
-          classArray: cl[0]
+          classArray: cl
         });
-        // console.log(cl);
-        // console.log(that.data.classArray);
-        console.log('---Successful---');
+        console.log('---Get Class List Successful---');
         console.log(res);
       },
       fail: function (res) {
-        console.log('---Fail---');
+        console.log('---Get Class List Fail---');
         console.log(res);
       },
       complete: function (res) {
-        console.log('---Complete---');
+        console.log('---Get Class List Complete---');
       }
     })
 

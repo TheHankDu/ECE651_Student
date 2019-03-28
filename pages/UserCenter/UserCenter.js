@@ -42,10 +42,8 @@ Page({
     wx.request({ //网络请求开始
       url: address + '/auth/login',
       data: {
-        // username: this.data.username,
-        // password: this.data.password
-        username: "gaofeng",
-        password: "654321"
+        username: this.data.username,
+        password: this.data.password
       },
       method: "POST",
       header: {

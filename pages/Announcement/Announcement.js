@@ -23,7 +23,7 @@ Page({
   Home: function () {
     getApp().globalData.currentCourse = null
     wx.navigateTo({
-      url: '../../pages/Course/Course',
+      url: '../CrsList/CrsList',
       success: function () {
         //console.log("called switchetab");
       }

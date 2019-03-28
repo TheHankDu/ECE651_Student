@@ -357,7 +357,6 @@ Page({
     wx.setNavigationBarTitle({
       title: '作业提交',
     })
-    console.log('Load 作业提交')
     
 
     var that = this;

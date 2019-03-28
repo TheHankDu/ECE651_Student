@@ -20,7 +20,7 @@ Page({
  
   Grade: function () {
     wx.navigateTo({
-      url: '../../pages/Grade/Grade',
+      url: '../Grade/Grade',
       success: function () {
         console.log("called switchetab");
       }
@@ -30,7 +30,7 @@ Page({
 
   Home: function () {
     wx.navigateTo({
-      url: '../../pages/Course/Course',
+      url: '../CrsList/CrsList',
       success: function () {
         console.log("called switchetab");
       }

@@ -5,27 +5,24 @@ Page({
    * 页面的初始数据
    */
   data: {
-    AssignmentArray: [], 
-    title: "",
-    content: "",
+    AssignmentArray: [] 
   },
 
-  Assignment(event) {
-    console.log(event.currentTarget)
-    getApp().globalData.currentHomework = event.currentTarget.dataset.hwlist
+  Assignment: function (e) {
+    getApp().globalData.currentHomework = e.currentTarget.dataset.hwlist;
     wx.navigateTo({
       url: '../../pages/HwSubm/HwSubm',
       success: function () {
-        console.log("called switchetab");
+        console.log("Switch to HwSubm");
       }
     });
   },
 
   Home: function () {
     wx.navigateTo({
-      url: '../../pages/课程/课程',
+      url: '../../pages/CrsList/CrsList',
       success: function () {
-        console.log("called switchetab");
+        console.log("Switch to CrsList");
       }
     });
   },
@@ -48,7 +45,6 @@ Page({
       method: "GET",
       success: function (res) {
         console.log(res)
-
         var ALT = [];
         var getHomeworkLength = res.data.homeworks.length;
         for (var i = 0; i < getHomeworkLength; i++) {
@@ -56,12 +52,11 @@ Page({
             res.data.homeworks[i].deadline = res.data.homeworks[i].deadline.substring(0, 10);
           }
         }
-        ALT.push(res.data.homeworks)
+        ALT = res.data.homeworks
         that.setData({
-          AssignmentArray: ALT[0]
+          AssignmentArray: ALT
         })
         console.log(that.data.AssignmentArray)
-
       }, 
     })
     wx.setNavigationBarTitle({

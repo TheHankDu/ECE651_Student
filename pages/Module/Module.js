@@ -28,7 +28,7 @@ Page({
 
   Home: function () {
     wx.navigateTo({
-      url: '../../pages/Course/Course',
+      url: '../../pages/CrsList/CrsList',
       success: function () {
         console.log("called switchetab");
       }

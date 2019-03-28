@@ -15,9 +15,9 @@ Page({
 
   Home: function () {
     wx.navigateTo({
-      url: '../../pages/课程/课程',
+      url: '../CrsList/CrsList',
       success: function () {
-        console.log("called switchetab");
+        console.log("Switch to CrsList");
       }
     }); 
   },
