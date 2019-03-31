@@ -1,3 +1,4 @@
+## What is Jovial
 Jovial is a learning management program that runs on the Wechat to aid the online communication between students and teachers. The capability of Jovial for student includes checking enrolled courses and course contents, recording attendances, viewing and submitting homework and many other features that students may need.
 You may refer to [Jovial Wiki](https://git.uwaterloo.ca/f36gao/651_project/wikis/home) for **Users Guide**.
 
@@ -7,10 +8,16 @@ Nowadays, along with the increasing of working pace, the mini-program will only 
 
 
 ## Getting Started
+Scan QR Code in Wechat Web Developer Tool to load mini program to your phone
 
 ### Jovial Concepts
-
+It is based on the platform of Wechat Mini Program and it is programed by modified version of NodeJS which fully utilize the capability of mobile phone. 
 ### Features
+1. Login and Register
+2. Check enrolled courses
+3. Check course material, assignment and grade
+4. Submit assignment and survey
+5. Check Announcement and receive push notification 
 
 ### User Guide
 1. Installation
